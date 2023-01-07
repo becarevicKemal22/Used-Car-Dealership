@@ -16,7 +16,12 @@ return new class extends Migration
         Schema::create('vehicle_models', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('manufacturer_id')->index();
+            if(env('DB_CONNECTION') === 'sqlite'){
+                $table->unsignedBigInteger('manufacturer_id')->index()->nullable();
+            }else{
+                $table->unsignedBigInteger('manufacturer_id')->index();
+            }
+            
             $table->foreign('manufacturer_id')->references('id')->on('manufacturers')->onDelete('cascade');
             $table->string('name');
 
