@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <form action="{{ route('vehicleModels.store') }}" method="POST">
     @csrf
     <label for="name">Ime modela: </label>
@@ -19,3 +22,4 @@
         @endif
     <button type="submit">Dodaj model</button>
 </form>
+@endsection
