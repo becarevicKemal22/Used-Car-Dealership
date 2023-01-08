@@ -9,6 +9,8 @@ class VehicleModel extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'manufacturer_id'];
+
     public function manufacturer(){
         return $this->belongsTo(Manufacturer::class);
     }

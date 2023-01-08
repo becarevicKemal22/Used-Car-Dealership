@@ -16,7 +16,6 @@ class VozilaResponsesTest extends TestCase
      */
     public function testIndexPage()
     {
-        $this->artisan('migrate:refresh --seed');
         $response = $this->get('/vozila');
 
         $response->assertStatus(200);
@@ -24,7 +23,6 @@ class VozilaResponsesTest extends TestCase
     }
 
     public function testShowPage(){
-        $this->artisan('migrate:refresh --seed');
         $response = $this->get('/vozila');
 
         $response = $this->get('/vozila/2');
@@ -36,7 +34,6 @@ class VozilaResponsesTest extends TestCase
     }
 
     public function testStoreRequest(){
-        $this->artisan('migrate:refresh --seed');
         $validated = [
             "name" => "Ime vozila",
             "price" => "12000",
@@ -63,7 +60,6 @@ class VozilaResponsesTest extends TestCase
     }
 
     public function testUpdateRequest(){
-        $this->artisan('migrate:refresh --seed');
         $response = $this->put('/vozila/1', [
             "name" => "Ime vozila",
             "price" => "12000",
@@ -86,7 +82,6 @@ class VozilaResponsesTest extends TestCase
     }
 
     public function testDeleteRequest(){
-        $this->artisan('migrate:refresh --seed');
         $response = $this->delete('/vozila/1');
         $response->assertStatus(302);
         $this->assertDatabaseMissing('vehicles', ['name' => 'PEUGEOT 308 SW 1.6 HDI , 2014 GODINA, NAVIGACIJA']);
