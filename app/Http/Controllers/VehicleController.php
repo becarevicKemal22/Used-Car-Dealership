@@ -42,7 +42,7 @@ class VehicleController extends Controller
     {
         //Auth again or just create a gate that automatically does it?
         $validated = $request->validated();
-        $post = Vehicle::create($request->all());
+        $post = Vehicle::create($validated);
         return redirect()->route('vozila.index')->with('status', 'Vozilo je uspjesno dodano.');
     }
 

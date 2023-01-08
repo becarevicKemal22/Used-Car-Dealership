@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,6 @@ Route::get('/', function () {
 });
 
 Route::resource('vozila', VehicleController::class);
+
+Route::get('/nova_marka', [ManufacturerController::class, 'create'])->name('manufacturers.create');
+Route::post('/nova_marka', [ManufacturerController::class, 'store'])->name('manufacturers.store');
