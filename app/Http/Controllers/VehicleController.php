@@ -54,7 +54,7 @@ class VehicleController extends Controller
      */
     public function show($id)
     {
-        $vehicle = Vehicle::find($id);
+        $vehicle = Vehicle::findOrFail($id);
         return view('vehicles.show', ['vehicle' => $vehicle]);
     }
 
@@ -66,7 +66,9 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vehicle = Vehicle::findOrFail($id);
+        $models = VehicleModel::with('manufacturer')->get();
+        return view('vehicles.edit', ['vehicle' => $vehicle, 'models' => $models]);
     }
 
     /**
@@ -76,9 +78,16 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreVehicle $request, $id)
     {
-        //
+        $vehicle = Vehicle::findOrFail($id);
+
+        $validated = $request->validated();
+        $vehicle->fill($validated);
+        $vehicle->save();
+
+        $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
+        return redirect()->route('vozila.index');
     }
 
     /**

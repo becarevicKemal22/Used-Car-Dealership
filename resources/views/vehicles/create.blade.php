@@ -2,6 +2,5 @@
     @csrf
     @include('vehicles._form')
     <br>
-    <button type="submit">Dodaj vozilo u bazu</button>
-
+    <button type="submit">Dodaj vozilo</button>
 </form>
