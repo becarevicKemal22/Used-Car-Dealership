@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section()
+@section('content')
     <form action="{{ route('vozila.update', ['vozila' => $vehicle->id]) }}" method="POST">
         @csrf
         @method('PUT')

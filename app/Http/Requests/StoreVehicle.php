@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreVehicle extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreVehicle extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth()->check();
     }
 
     /**

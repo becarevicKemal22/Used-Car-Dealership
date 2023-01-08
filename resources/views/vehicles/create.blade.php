@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section()
+@section('content')
     <form action="{{ route('vozila.store') }}" method="POST">
         @csrf
         @include('vehicles._formCreate')

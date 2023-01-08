@@ -102,12 +102,17 @@
                             <li>
                                 <a href="#!">O nama</a>
                             </li>
-                            <li>
-                                <a href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 4</a>
-                            </li>
+                            @auth
+                                <li>
+                                    <a href="{{ route('vozila.create') }}">Dodaj vozilo</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('manufacturers.create') }}">Dodaj marku</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('vehicleModels.create') }}">Dodaj model auta</a>
+                                </li>
+                            @endauth
                         </ul>
 
                     </div>
