@@ -6,6 +6,8 @@ use App\Http\Requests\StoreVehicle;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class VehicleController extends Controller
 {
@@ -27,7 +29,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        //auth
+        $this->authorize('vehicles.create');
         $models = VehicleModel::with('manufacturer')->get();
         return view('vehicles.create', ['models' => $models]);
     }
@@ -66,6 +68,7 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('vehicles.update');
         $vehicle = Vehicle::findOrFail($id);
         $models = VehicleModel::with('manufacturer')->get();
         return view('vehicles.edit', ['vehicle' => $vehicle, 'models' => $models]);
@@ -98,11 +101,12 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        $post = Vehicle::findOrFail($id);
-        
-        //Auth
 
-        $post->delete();
+        Gate::authorize('vehicles.delete');
+
+        $vehicle = Vehicle::findOrFail($id);
+
+        $vehicle->delete();
 
         return redirect('vehicles.index');
     }

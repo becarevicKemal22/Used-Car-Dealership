@@ -14,15 +14,17 @@ class ManufacturersAndModelsCreateTest extends TestCase
      */
     public function testNewModelAndManufacturer()
     {
-        $response = $this->get('/nova_marka');
+        $user = $this->user();
+
+        $response = $this->actingAs($user)->get('/nova_marka');
         $response->assertStatus(200);
 
-        $response = $this->post('/nova_marka', ['name' => 'Manufacturer']);
+        $response = $this->actingAs($user)->post('/nova_marka', ['name' => 'Manufacturer']);
         $response->assertStatus(302)->assertSessionHas(['status' => 'Marka uspjesno dodana.']);
         
-        $response = $this->get('/novi_model');
+        $response = $this->actingAs($user)->get('/novi_model');
         $response->assertStatus(200);
-        $response = $this->post('/novi_model', ['name' => 'mojModel', 'manufacturer_id' => 1]);
+        $response = $this->actingAs($user)->post('/novi_model', ['name' => 'mojModel', 'manufacturer_id' => 1]);
         $response->assertStatus(302)->assertSessionHas(['status' => 'Model uspjesno dodan.']);
 
         $this->assertDatabaseHas('manufacturers', ['name' => 'Manufacturer']);

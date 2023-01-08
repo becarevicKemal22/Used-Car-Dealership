@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Artisan;
@@ -17,5 +18,9 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->artisan('db:seed');
+    }
+
+    public function user(){
+        return User::factory()->create();
     }
 }
