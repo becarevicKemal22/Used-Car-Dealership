@@ -3,6 +3,7 @@
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VehicleModelController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::post('/nova_marka', [ManufacturerController::class, 'store'])->name('manu
 
 Route::get('/novi_model', [VehicleModelController::class, 'create'])->name('vehicleModels.create');
 Route::post('/novi_model', [VehicleModelController::class, 'store'])->name('vehicleModels.store');
-Auth::routes();
+
+Auth::routes(['register' => false, 'reset' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -57,8 +57,8 @@
 
 <script>
     function updateModelDropdown(models) {
-        let val = document.getElementById('manufacturer').value;
         let modelDropdown = document.getElementById('model_id');
+        let val = document.getElementById('manufacturer').value;
 
         //Remove all children
         let child = modelDropdown.lastElementChild;
