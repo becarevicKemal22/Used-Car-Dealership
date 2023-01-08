@@ -84,3 +84,4 @@ Homestead.json
 .env
 /public/.htaccess
 storage/*.key
+storage/debugbar
