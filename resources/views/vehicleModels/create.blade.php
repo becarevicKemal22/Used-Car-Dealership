@@ -21,12 +21,6 @@
             <h1>Ne postoji ni jedna marka kojoj auto moze pripadati. Molimo prvo kreirajte marku <a
                     href="{{ route('manufacturers.create') }}">ovdje</a>.</h1>
         @endif
-<<<<<<< HEAD
-    <button type="submit">Dodaj model</button>
-</form>
-@endsection
-=======
         <button type="submit">Dodaj model</button>
     </form>
 @endsection
->>>>>>> 5-cu-861m6f5cf-add-user-authentication-for-admins
