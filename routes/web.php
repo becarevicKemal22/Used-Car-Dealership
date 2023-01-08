@@ -27,3 +27,6 @@ Route::post('/nova_marka', [ManufacturerController::class, 'store'])->name('manu
 
 Route::get('/novi_model', [VehicleModelController::class, 'create'])->name('vehicleModels.create');
 Route::post('/novi_model', [VehicleModelController::class, 'store'])->name('vehicleModels.store');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
