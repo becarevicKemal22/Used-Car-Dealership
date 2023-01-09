@@ -40,13 +40,17 @@
 <textarea name="opis" id="opis" cols="30" rows="10">{{ $vehicle->opis ?? '' }}</textarea> <br>
 
 <label for="oprema">Oprema: </label> <br>
-<textarea name="oprema" id="oprema" cols="30" rows="10" >{{ $vehicle->oprema ?? '' }}</textarea> <br>
+<textarea name="oprema" id="oprema" cols="30" rows="10">{{ $vehicle->oprema ?? '' }}</textarea> <br>
 
 
 @php
     use Illuminate\Support\Facades\DB;
-
-    if (DB::table('vehicle_models')->where('id', $vehicle->model_id)->exists()) {
+    
+    if (
+        DB::table('vehicle_models')
+            ->where('id', $vehicle->model_id)
+            ->exists()
+    ) {
         $model = App\Models\VehicleModel::find($vehicle->model_id);
         $model_name = $model->name;
         $model_id = $model->id;
@@ -56,15 +60,11 @@
 @endphp
 
 <select id="manufacturer" name="manufacturer">
-    @if($manufacturer_id)
-        <option value="{{ $manufacturer_id }}"> {{ $manufacturer_name }} </option>
-    @endif
+
 </select> <br>
 
 <select name="model_id" id="model_id">
-    @if($model_id)
-        <option value="{{ $model_id }}"> {{ $model_name }} </option>
-    @endif
+
 </select> <br>
 
 <div class="form-group">
@@ -79,7 +79,10 @@
 @endif
 
 <script>
-    function updateModelDropdown(models) {
+    const manufacturer_id = {{ $manufacturer_id }};
+    const model_id = {{ $model_id }};
+
+    function updateModelDropdown(models, model_id = null) {
         let val = document.getElementById('manufacturer').value;
         let modelDropdown = document.getElementById('model_id');
 
@@ -99,6 +102,11 @@
             let option = document.createElement('option');
             option.value = element.id;
             option.text = element.name;
+            
+            if (model_id == element.id) {
+                option.selected = true;
+            }
+
             modelDropdown.appendChild(option);
         })
     }
@@ -120,10 +128,13 @@
         const option = document.createElement('option');
         option.value = manufacturer.id;
         option.text = manufacturer.name;
+        if (manufacturer.id == manufacturer_id) {
+            option.selected = true;
+        }
         manufacturerDropdown.appendChild(option);
     });
 
-    updateModelDropdown(models);
+    updateModelDropdown(models, model_id);
 
     manufacturerDropdown.addEventListener('change', () => {
         updateModelDropdown(models);
