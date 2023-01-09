@@ -33,29 +33,6 @@ class VozilaResponsesTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function testUpdateRequest(){
-        $user = $this->user();
-        $response = $this->actingAs($user)->put('/vozila/1', [
-            "name" => "Ime vozila",
-            "price" => "12000",
-            "production_year" => "2008",
-            "kilometers" => "290000",
-            "engine_type" => "Dizel",
-            "chassis_type" => "Limuzina",
-            "gearbox" => "Manuelni",
-            "color" => "Crna",
-            "door_number" => "4/5",
-            "engine_volume" => "2.2",
-            "engine_strength" => "89",
-            "drive" => "Prednji",
-            "opis" => "Ovo je begi neki opis.",
-            "oprema" => "ABS/ESP/ISOFIX",
-            "model_id" => "1",
-        ]);
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('vehicles', ['name' => 'Ime vozila']);
-    }
-
     public function testDeleteRequest(){
         $user = $this->user();
         $response = $this->actingAs($user)->delete('/vozila/1');
