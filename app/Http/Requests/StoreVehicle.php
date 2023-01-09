@@ -40,6 +40,7 @@ class StoreVehicle extends FormRequest
             'opis' => 'nullable|string',
             'oprema' => 'required|string',
             'model_id' =>'nullable|integer',
+            'thumbnail' => 'required|image',
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class VehicleController extends Controller
 {
@@ -42,9 +43,19 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicle $request)
     {
-        //Auth again or just create a gate that automatically does it?
         $validated = $request->validated();
-        $post = Vehicle::create($validated);
+        $vehicle = Vehicle::make($validated);
+        
+        //Thumbnail storage
+
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('thumbnails');
+
+            $vehicle->thumbnail = $path;
+        }
+
+        $vehicle->save();
+
         return redirect()->route('vozila.index')->with('status', 'Vozilo je uspjesno dodano.');
     }
 
@@ -57,7 +68,8 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = Vehicle::findOrFail($id);
-        return view('vehicles.show', ['vehicle' => $vehicle]);
+        $thumbnail = Storage::url($vehicle->thumbnail);
+        return view('vehicles.show', ['vehicle' => $vehicle, 'thumbnail' => $thumbnail]);
     }
 
     /**
@@ -87,6 +99,13 @@ class VehicleController extends Controller
 
         $validated = $request->validated();
         $vehicle->fill($validated);
+        
+        if ($request->hasFile('thumbnail')) {
+            Storage::delete($vehicle->thumbnail);
+            $path = $request->file('thumbnail')->store('thumbnails');
+            $vehicle->thumbnail = $path;
+        }
+        
         $vehicle->save();
 
         $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
@@ -105,6 +124,8 @@ class VehicleController extends Controller
         Gate::authorize('vehicles.delete');
 
         $vehicle = Vehicle::findOrFail($id);
+
+        Storage::delete($vehicle->thumbnail);
 
         $vehicle->delete();
 

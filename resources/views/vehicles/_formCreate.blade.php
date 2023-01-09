@@ -49,6 +49,12 @@
 <select name="model_id" id="model_id">
     
 </select> <br>
+
+<div class="form-group">
+    <label>Thumbnail</label>
+    <input type="file" name="thumbnail" id="thumbnail" class="form-control-file">
+</div>
+
 @if ($errors->any())
     @foreach ($errors->all() as $error)
         <p style="color:red">{{ $error }}</p>
