@@ -101,9 +101,13 @@ class VehicleController extends Controller
         $vehicle->fill($validated);
         
         if ($request->hasFile('thumbnail')) {
+            // dd(Storage::disk('do_spaces')->files());
+            // dd(Storage::disk('do_spaces')->exists('slika.jpg'));
             Storage::delete($vehicle->thumbnail);
             $path = $request->file('thumbnail')->store('thumbnails');
             $vehicle->thumbnail = $path;
+            $name = '/vozilo'.$vehicle->id.'/thumbnail.'.$request->file('thumbnail')->guessExtension();
+            dd(Storage::disk('do_spaces')->put('test.txt','Please work'));
         }
         
         $vehicle->save();
