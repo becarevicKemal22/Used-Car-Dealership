@@ -14,4 +14,8 @@ class Vehicle extends Model
     public function model(){
         return $this->belongsTo(VehicleModel::class);
     }
+
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
 }

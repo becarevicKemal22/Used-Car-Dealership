@@ -74,7 +74,7 @@
 
 <div class="form-group">
     <label>Ostale slike: </label>
-    <input type="file" name="photos" id="photos" class="form-control-file" multiple>
+    <input type="file" name="photos[]" id="photos[]" class="form-control-file" multiple>
 </div>
 
 @if ($errors->any())
