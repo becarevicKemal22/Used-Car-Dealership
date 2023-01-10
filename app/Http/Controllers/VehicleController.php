@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVehicle;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
@@ -45,13 +46,28 @@ class VehicleController extends Controller
     {
         $validated = $request->validated();
         $vehicle = Vehicle::make($validated);
-        
+
         //Thumbnail storage
 
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('thumbnails');
-
             $vehicle->thumbnail = $path;
+        }
+
+        if (!app()->isProduction()) {
+            $additionToPath = 'local/';
+        } else {
+            $additionToPath = '';
+        }
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = Storage::disk('s3')->put('vehicles/' . $additionToPath . 'vehicle' . $vehicle->id, $photo);
+                $image = new Image();
+                $image->path = $path;
+                $image->vehicle_id = $vehicle->id;
+                $image->save();
+            }
         }
 
         $vehicle->save();
@@ -69,7 +85,8 @@ class VehicleController extends Controller
     {
         $vehicle = Vehicle::findOrFail($id);
         $thumbnail = Storage::url($vehicle->thumbnail);
-        return view('vehicles.show', ['vehicle' => $vehicle, 'thumbnail' => $thumbnail]);
+        $imagePaths = $vehicle->images()->get()->pluck('path');
+        return view('vehicles.show', ['vehicle' => $vehicle, 'thumbnail' => $thumbnail, 'imagePaths' => $imagePaths]);
     }
 
     /**
@@ -96,20 +113,44 @@ class VehicleController extends Controller
     public function update(StoreVehicle $request, $id)
     {
         $vehicle = Vehicle::findOrFail($id);
-
+        $thumbnail_path = $vehicle->thumbnail;
+        $images = $vehicle->images()->get();
         $validated = $request->validated();
         $vehicle->fill($validated);
-        
+
         if ($request->hasFile('thumbnail')) {
-            // dd(Storage::disk('do_spaces')->files());
-            // dd(Storage::disk('do_spaces')->exists('slika.jpg'));
-            Storage::delete($vehicle->thumbnail);
+            Storage::delete($thumbnail_path);
             $path = $request->file('thumbnail')->store('thumbnails');
             $vehicle->thumbnail = $path;
-            $name = '/vozilo'.$vehicle->id.'/thumbnail.'.$request->file('thumbnail')->guessExtension();
-            dd(Storage::disk('do_spaces')->put('test.txt','Please work'));
         }
-        
+
+        //Env must be detected so that the folder in s3 can be set accordingly so that they don't clash
+        if (!app()->isProduction()) {
+            $additionToPath = 'local/';
+        } else {
+            $additionToPath = '';
+        }
+
+        if ($request->hasFile('photos')) {
+            //Deleting all the currently available images
+            if ($images) {
+                foreach ($images as $image) {
+                    $path = $image->path;
+                    Storage::disk('s3')->delete($path);
+                    Image::find($image->id)->delete();
+                }
+            }
+
+            //Storing the new ones again
+            foreach ($request->file('photos') as $photo) {
+                $path = Storage::disk('s3')->put('vehicles/' . $additionToPath . 'vehicle' . $vehicle->id, $photo);
+                $image = new Image();
+                $image->path = $path;
+                $image->vehicle_id = $vehicle->id;
+                $image->save();
+            }
+        }
+
         $vehicle->save();
 
         $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
@@ -130,6 +171,14 @@ class VehicleController extends Controller
         $vehicle = Vehicle::findOrFail($id);
 
         Storage::delete($vehicle->thumbnail);
+
+        $images = $vehicle->images();
+
+        foreach ($images as $image) {
+            $path = $image->path;
+            Storage::disk('s3')->delete($path);
+            Image::find($image->id)->delete();
+        }
 
         $vehicle->delete();
 
