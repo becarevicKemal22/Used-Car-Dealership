@@ -3,6 +3,7 @@
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VehicleModelController;
+use App\Http\Controllers\VehicleTypeController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,9 @@ Route::post('/nova_marka', [ManufacturerController::class, 'store'])->name('manu
 
 Route::get('/novi_model', [VehicleModelController::class, 'create'])->name('vehicleModels.create');
 Route::post('/novi_model', [VehicleModelController::class, 'store'])->name('vehicleModels.store');
+
+Route::get('/novi_tip', [VehicleTypeController::class, 'create'])->name('vehicleTypes.create');
+Route::post('/novi_tip', [VehicleTypeController::class, 'store'])->name('vehicleTypes.store');
 
 Auth::routes(['register' => false, 'reset' => false]);
 

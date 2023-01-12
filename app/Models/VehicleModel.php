@@ -9,7 +9,7 @@ class VehicleModel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'manufacturer_id'];
+    protected $fillable = ['name', 'manufacturer_id', 'vehicle_type_id'];
 
     public function manufacturer(){
         return $this->belongsTo(Manufacturer::class);
@@ -17,5 +17,9 @@ class VehicleModel extends Model
 
     public function vehicles(){
         return $this->hasMany(Vehicle::class);
+    }
+
+    public function vehicleType(){
+        return $this->belongsTo(VehicleType::class);
     }
 }

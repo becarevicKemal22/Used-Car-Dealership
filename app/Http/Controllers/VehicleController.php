@@ -7,6 +7,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
+use App\Models\VehicleType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
@@ -184,9 +185,7 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-
         Gate::authorize('vehicles.delete');
-
         $vehicle = Vehicle::findOrFail($id);
 
         Storage::delete($vehicle->thumbnail);
@@ -204,6 +203,6 @@ class VehicleController extends Controller
 
         $vehicle->delete();
 
-        return redirect('vehicles.index');
+        return redirect()->route('vozila.index');
     }
 }
