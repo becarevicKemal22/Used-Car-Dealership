@@ -53,7 +53,7 @@ class VehicleController extends Controller
         $vehicle = Vehicle::make($validated);
 
         if (!app()->isProduction()) {
-            $additionToPath = 'local';
+            $additionToPath = 'local/';
         } else {
             $additionToPath = '';
         }
@@ -61,14 +61,14 @@ class VehicleController extends Controller
         //Thumbnail storage
 
         if ($request->hasFile('thumbnail')) {
-            $path = Storage::disk('s3')->put('thumbnails/' . $additionToPath, $request->file('thumbnail'));
+            $path = Storage::disk('s3')->put($additionToPath . 'thumbnails', $request->file('thumbnail'));
             $vehicle->thumbnail = $path;
         }
 
 
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
-                $path = Storage::disk('s3')->put('vehicles/' . $additionToPath . '/vehicle' . $vehicle->id, $photo);
+                $path = Storage::disk('s3')->put($additionToPath . 'vehicles/' .  'vehicle' . $vehicle->id, $photo);
                 $image = new Image();
                 $image->path = $path;
                 $image->vehicle_id = $vehicle->id;
@@ -135,14 +135,14 @@ class VehicleController extends Controller
 
         //Env must be detected so that the folder in s3 can be set accordingly so that they don't clash
         if (!app()->isProduction()) {
-            $additionToPath = 'local';
+            $additionToPath = 'local/';
         } else {
             $additionToPath = '';
         }
 
         if ($request->hasFile('thumbnail')) {
             Storage::disk('s3')->delete($thumbnail_path);
-            $path = Storage::disk('s3')->put('thumbnails/' . $additionToPath, $request->file('thumbnail'));
+            $path = Storage::disk('s3')->put($additionToPath . 'thumbnails', $request->file('thumbnail'));
             $vehicle->thumbnail = $path;
         }
 
@@ -159,7 +159,7 @@ class VehicleController extends Controller
 
             //Storing the new ones again
             foreach ($request->file('photos') as $photo) {
-                $path = Storage::disk('s3')->put('vehicles/' . $additionToPath . '/vehicle' . $vehicle->id, $photo);
+                $path = Storage::disk('s3')->put($additionToPath . 'vehicles/' . 'vehicle' . $vehicle->id, $photo);
                 $image = new Image();
                 $image->path = $path;
                 $image->vehicle_id = $vehicle->id;
