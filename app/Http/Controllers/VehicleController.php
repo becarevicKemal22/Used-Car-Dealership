@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +21,11 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $vehicles = Vehicle::all(); // or add all the queries from the forms or search or whatever
+        $vehicles = Cache::get('all_vehicles', function(){
+            $temp = Vehicle::all(); // or add all the queries from the forms or search or whatever should affect cache too.
+            Cache::put('all_vehicles', $temp, now()->addMinutes(30));
+            return $temp;
+        }); 
         return view('vehicles.index', ['vehicles' => $vehicles]);
     }
 
@@ -72,6 +77,8 @@ class VehicleController extends Controller
 
         $vehicle->save();
 
+        Cache::forget('all_vehicles');
+
         return redirect()->route('vozila.index')->with('status', 'Vozilo je uspjesno dodano.');
     }
 
@@ -83,7 +90,11 @@ class VehicleController extends Controller
      */
     public function show($id)
     {
-        $vehicle = Vehicle::findOrFail($id);
+        $vehicle = Cache::get($id, function() use($id){
+            $temp = Vehicle::findOrFail($id);
+            Cache::put($id, $temp, now()->addMinutes(30));
+            return $temp;
+        });
         $thumbnail = Storage::url($vehicle->thumbnail);
         $imagePaths = $vehicle->images()->get()->pluck('path');
         return view('vehicles.show', ['vehicle' => $vehicle, 'thumbnail' => $thumbnail, 'imagePaths' => $imagePaths]);
@@ -153,6 +164,9 @@ class VehicleController extends Controller
 
         $vehicle->save();
 
+        Cache::forget($vehicle->id);
+        Cache::forget('all_vehicles');
+
         $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
         return redirect()->route('vozila.index');
     }
@@ -171,6 +185,9 @@ class VehicleController extends Controller
         $vehicle = Vehicle::findOrFail($id);
 
         Storage::delete($vehicle->thumbnail);
+
+        Cache::forget($vehicle->id);
+        Cache::forget('all_vehicles');
 
         $images = $vehicle->images();
 
