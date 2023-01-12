@@ -7,8 +7,10 @@ namespace App\Providers;
 use App\Models\Manufacturer;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
+use App\Models\VehicleType;
 use App\Policies\VehicleModelAndManufacturerPolicy;
 use App\Policies\VehiclePolicy;
+use App\Policies\VehicleTypePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -24,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         Vehicle::class => VehiclePolicy::class,
         Manufacturer::class => VehicleModelAndManufacturerPolicy::class,
         VehicleModel::class => VehicleModelAndManufacturerPolicy::class,
+        VehicleType::class => VehicleTypePolicy::class,
     ];
 
     /**
@@ -37,5 +40,6 @@ class AuthServiceProvider extends ServiceProvider
         
         Gate::resource('vehicles', VehiclePolicy::class);
         Gate::define('create', [VehicleModelAndManufacturerPolicy::class, 'create']);
+        Gate::define('create-type', [VehicleTypePolicy::class, 'create']);
     }
 }

@@ -24,7 +24,7 @@ class ManufacturersAndModelsCreateTest extends TestCase
         
         $response = $this->actingAs($user)->get('/novi_model');
         $response->assertStatus(200);
-        $response = $this->actingAs($user)->post('/novi_model', ['name' => 'mojModel', 'manufacturer_id' => 1]);
+        $response = $this->actingAs($user)->post('/novi_model', ['name' => 'mojModel', 'manufacturer_id' => 1, 'vehicle_type_id' => 1]);
         $response->assertStatus(302)->assertSessionHas(['status' => 'Model uspjesno dodan.']);
 
         $this->assertDatabaseHas('manufacturers', ['name' => 'Manufacturer']);

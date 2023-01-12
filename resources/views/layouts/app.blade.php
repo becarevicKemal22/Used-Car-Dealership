@@ -102,6 +102,8 @@
                             <li>
                                 <a href="#!">O nama</a>
                             </li>
+                            
+                            {{-- Admin options --}}
                             @auth
                                 <li>
                                     <a href="{{ route('vozila.create') }}">Dodaj vozilo</a>
@@ -111,6 +113,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('vehicleModels.create') }}">Dodaj model auta</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('vehicleTypes.create') }}">Dodaj tip auta</a>
                                 </li>
                             @endauth
                         </ul>

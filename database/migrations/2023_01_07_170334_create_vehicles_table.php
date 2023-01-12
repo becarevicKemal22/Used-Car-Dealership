@@ -30,8 +30,8 @@ return new class extends Migration
             $table->string('drive', 16)->nullable();
             $table->text('opis');
             $table->text('oprema');
-            $table->unsignedBigInteger('model_id')->index()->nullable();
-            $table->foreign('model_id')->references('id')->on('vehicle_models')->onDelete('set null');
+            $table->unsignedBigInteger('vehicle_model_id')->index()->nullable();
+            $table->foreign('vehicle_model_id')->references('id')->on('vehicle_models')->onDelete('set null');
 
             $table->timestamps();
         });

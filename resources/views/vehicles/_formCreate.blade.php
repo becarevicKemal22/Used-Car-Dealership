@@ -46,7 +46,7 @@
 
 </select> <br>
 
-<select name="model_id" id="model_id">
+<select name="vehicle_model_id" id="vehicle_model_id">
     
 </select> <br>
 
@@ -68,7 +68,7 @@
 
 <script>
     function updateModelDropdown(models) {
-        let modelDropdown = document.getElementById('model_id');
+        let modelDropdown = document.getElementById('vehicle_model_id');
         let val = document.getElementById('manufacturer').value;
 
         //Remove all children

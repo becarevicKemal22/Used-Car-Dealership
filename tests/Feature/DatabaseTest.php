@@ -28,7 +28,7 @@ class DatabaseTest extends TestCase
         $model->save();
 
         $car = Vehicle::factory()->peugeot4008()->make();
-        $car->model_id = $model->id;
+        $car->vehicle_model_id = $model->id;
         $car->save();
 
         $this->assertDatabaseHas('vehicles', ['id' => 1]);

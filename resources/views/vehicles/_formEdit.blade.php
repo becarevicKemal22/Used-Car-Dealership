@@ -48,10 +48,10 @@
     
     if (
         DB::table('vehicle_models')
-            ->where('id', $vehicle->model_id)
+            ->where('id', $vehicle->vehicle_model_id)
             ->exists()
     ) {
-        $model = App\Models\VehicleModel::find($vehicle->model_id);
+        $model = App\Models\VehicleModel::find($vehicle->vehicle_model_id);
         $model_name = $model->name;
         $model_id = $model->id;
         $manufacturer_name = $model->manufacturer->name;
@@ -63,7 +63,7 @@
 
 </select> <br>
 
-<select name="model_id" id="model_id">
+<select name="vehicle_model_id" id="vehicle_model_id">
 
 </select> <br>
 
@@ -89,7 +89,7 @@
 
     function updateModelDropdown(models, model_id = null) {
         let val = document.getElementById('manufacturer').value;
-        let modelDropdown = document.getElementById('model_id');
+        let modelDropdown = document.getElementById('vehicle_model_id');
 
         //Remove all children
         let child = modelDropdown.lastElementChild;

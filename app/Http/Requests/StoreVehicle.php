@@ -39,7 +39,7 @@ class StoreVehicle extends FormRequest
             'drive' => 'nullable|string',
             'opis' => 'nullable|string',
             'oprema' => 'required|string',
-            'model_id' =>'nullable|integer',
+            'vehicle_model_id' =>'nullable|integer',
             'thumbnail' => 'required|image',
         ];
     }
