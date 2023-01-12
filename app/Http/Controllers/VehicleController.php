@@ -52,22 +52,23 @@ class VehicleController extends Controller
         $validated = $request->validated();
         $vehicle = Vehicle::make($validated);
 
-        //Thumbnail storage
-
-        if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('thumbnails');
-            $vehicle->thumbnail = $path;
-        }
-
         if (!app()->isProduction()) {
-            $additionToPath = 'local/';
+            $additionToPath = 'local';
         } else {
             $additionToPath = '';
         }
 
+        //Thumbnail storage
+
+        if ($request->hasFile('thumbnail')) {
+            $path = Storage::disk('s3')->put('thumbnails/' . $additionToPath, $request->file('thumbnail'));
+            $vehicle->thumbnail = $path;
+        }
+
+
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
-                $path = Storage::disk('s3')->put('vehicles/' . $additionToPath . 'vehicle' . $vehicle->id, $photo);
+                $path = Storage::disk('s3')->put('vehicles/' . $additionToPath . '/vehicle' . $vehicle->id, $photo);
                 $image = new Image();
                 $image->path = $path;
                 $image->vehicle_id = $vehicle->id;
@@ -95,8 +96,11 @@ class VehicleController extends Controller
             Cache::put($id, $temp, now()->addMinutes(30));
             return $temp;
         });
-        $thumbnail = Storage::url($vehicle->thumbnail);
+        $thumbnail = Storage::disk('s3')->url($vehicle->thumbnail);
         $imagePaths = $vehicle->images()->get()->pluck('path');
+        foreach ($imagePaths as $key => $imagePath) {
+            $imagePaths[$key] = Storage::disk('s3')->url($imagePath);
+        }
         return view('vehicles.show', ['vehicle' => $vehicle, 'thumbnail' => $thumbnail, 'imagePaths' => $imagePaths]);
     }
 
@@ -129,18 +133,19 @@ class VehicleController extends Controller
         $validated = $request->validated();
         $vehicle->fill($validated);
 
-        if ($request->hasFile('thumbnail')) {
-            Storage::delete($thumbnail_path);
-            $path = $request->file('thumbnail')->store('thumbnails');
-            $vehicle->thumbnail = $path;
-        }
-
         //Env must be detected so that the folder in s3 can be set accordingly so that they don't clash
         if (!app()->isProduction()) {
-            $additionToPath = 'local/';
+            $additionToPath = 'local';
         } else {
             $additionToPath = '';
         }
+
+        if ($request->hasFile('thumbnail')) {
+            Storage::disk('s3')->delete($thumbnail_path);
+            $path = Storage::disk('s3')->put('thumbnails/' . $additionToPath, $request->file('thumbnail'));
+            $vehicle->thumbnail = $path;
+        }
+
 
         if ($request->hasFile('photos')) {
             //Deleting all the currently available images
@@ -154,7 +159,7 @@ class VehicleController extends Controller
 
             //Storing the new ones again
             foreach ($request->file('photos') as $photo) {
-                $path = Storage::disk('s3')->put('vehicles/' . $additionToPath . 'vehicle' . $vehicle->id, $photo);
+                $path = Storage::disk('s3')->put('vehicles/' . $additionToPath . '/vehicle' . $vehicle->id, $photo);
                 $image = new Image();
                 $image->path = $path;
                 $image->vehicle_id = $vehicle->id;
