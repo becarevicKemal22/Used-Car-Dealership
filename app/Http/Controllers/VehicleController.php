@@ -23,7 +23,7 @@ class VehicleController extends Controller
     {
         $vehicles = Cache::get('all_vehicles', function(){
             $temp = Vehicle::all(); // or add all the queries from the forms or search or whatever should affect cache too.
-            Cache::put('all_vehicles', $temp, 15);
+            Cache::put('all_vehicles', $temp, now()->addMinutes(30));
             return $temp;
         }); 
         return view('vehicles.index', ['vehicles' => $vehicles]);
@@ -92,7 +92,7 @@ class VehicleController extends Controller
     {
         $vehicle = Cache::get($id, function() use($id){
             $temp = Vehicle::findOrFail($id);
-            Cache::put($id, $temp, 15);
+            Cache::put($id, $temp, now()->addMinutes(30));
             return $temp;
         });
         $thumbnail = Storage::url($vehicle->thumbnail);
