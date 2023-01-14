@@ -9,7 +9,9 @@
                     <div class="dropdown">
                         <button class="btn btn-secondary bg-primary text-white dropBtn" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="sortDropdown()">
-                            Sortiranje <i class="fa-solid fa-sort" style="padding-left: 5px;"></i>
+                            <div class="d-flex align-items-center gap-1">
+                                Sortiranje <i class="fa-solid fa-sort" style="padding-left: 5px;"></i> 
+                            </div>
                         </button>
                         <div class="dropdown-menu" id="sortDropdown" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item"
