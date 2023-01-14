@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-4">
         <div class="row gx-5">
-            <div class="col-9 pt-3">
+            <div class="col-md-9">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4>Nasa trenutna ponuda vozila</h4>
                     <div class="dropdown">
@@ -52,7 +52,7 @@
                     <p>{{ $vehicle->name }}</p>
                 @endforeach
             </div>
-            <div class="col-lg-3 pt-3 filters">
+            <div class="col-md-3 pt-3 filters">
                 <h2>Detaljna pretraga</h2>
                 <form action="{{ route('vozila.index') }}" method="GET">
                     <label for="manufacturer"><i class="fa-solid fa-industry" style="color: #8a1820; padding-right: 0.5em;"></i> Marka</label> <br>
