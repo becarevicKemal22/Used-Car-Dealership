@@ -7,6 +7,34 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+$primary: #8a1820;
+$secondary: #e9e9e9;
+
 a{
     text-decoration: none;
+}
+
+.show{
+    display: block !important;
+}
+
+.w-90{
+    width: 90% !important;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.filters{
+    border-radius: 0.5em;
+    border-left: 3px solid $primary;
+    border-top: 3px solid $primary;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.icon{
+    max-width: 2em;
+    max-height: 2em;
 }
