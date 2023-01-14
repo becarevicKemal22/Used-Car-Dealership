@@ -20,14 +20,19 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $vehicles = Cache::get('all_vehicles', function(){
             $temp = Vehicle::all(); // or add all the queries from the forms or search or whatever should affect cache too.
             Cache::put('all_vehicles', $temp, now()->addMinutes(30));
             return $temp;
         }); 
-        return view('vehicles.index', ['vehicles' => $vehicles]);
+
+        $models = VehicleModel::with('manufacturer')->get();
+
+        $types = VehicleType::all();
+        
+        return view('vehicles.index', ['vehicles' => $vehicles, 'models' => $models, 'types' => $types]);
     }
 
     /**

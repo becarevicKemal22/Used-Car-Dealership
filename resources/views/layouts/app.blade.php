@@ -14,6 +14,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <script src="https://kit.fontawesome.com/8a54e0956e.js" crossorigin="anonymous"></script>
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -102,7 +104,7 @@
                             <li>
                                 <a href="#!">O nama</a>
                             </li>
-                            
+
                             {{-- Admin options --}}
                             @auth
                                 <li>
@@ -166,6 +168,8 @@
         <!-- Footer -->
 
     </div>
+
+    
 </body>
 
 </html>
