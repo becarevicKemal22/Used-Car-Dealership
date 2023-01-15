@@ -3,14 +3,14 @@
 @section('content')
     <div class="container mt-4">
         <div class="row gx-5">
-            <div class="col-md-9">
+            <div class="col-lg-9 col-md-7">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4>Nasa trenutna ponuda vozila</h4>
                     <div class="dropdown">
                         <button class="btn btn-secondary bg-primary text-white dropBtn" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="sortDropdown()">
                             <div class="d-flex align-items-center gap-1">
-                                Sortiranje <i class="fa-solid fa-sort" style="padding-left: 5px;"></i> 
+                                Sortiranje <i class="fa-solid fa-sort" style="padding-left: 5px;"></i>
                             </div>
                         </button>
                         <div class="dropdown-menu" id="sortDropdown" aria-labelledby="dropdownMenuButton">
@@ -47,29 +47,30 @@
                     </div>
                 </form>
 
-
-
-
-                @foreach ($vehicles as $vehicle)
-                    <p>{{ $vehicle->name }}</p>
-                @endforeach
+                <div class="d-flex justify-content-center gap-4 flex-wrap mb-4">
+                    @foreach ($vehicles as $vehicle)
+                            <x-vehicle-card :$vehicle></x-vehicle-card>
+                    @endforeach
+                </div>
             </div>
-            <div class="col-md-3 pt-3 filters">
+            <div class="col-lg-3 col-md-4 pt-3 filters">
                 <h2>Detaljna pretraga</h2>
                 <form action="{{ route('vozila.index') }}" method="GET">
-                    <label for="manufacturer"><i class="fa-solid fa-industry" style="color: #8a1820; padding-right: 0.5em;"></i> Marka</label> <br>
+                    <label for="manufacturer"><i class="fa-solid fa-industry"
+                            style="color: #8a1820; padding-right: 0.5em;"></i> Marka</label> <br>
                     <select id="manufacturer" name="manufacturer" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
 
                     </select> <br>
                     <div class="modeli hidden">
-                        <label for="vehicle_model_id"><i class="fa-solid fa-car" style="color: #8a1820; padding-right: 0.5em;"></i> Model</label> <br>
+                        <label for="vehicle_model_id"><i class="fa-solid fa-car"
+                                style="color: #8a1820; padding-right: 0.5em;"></i> Model</label> <br>
                         <select name="vehicle_model_id" id="vehicle_model_id"
                             class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
 
                         </select> <br>
                     </div>
 
-                    <label for=""><i class="fa-regular fa-calendar mt-2" style="padding-right: 0.5em; color: #8a1820"></i>Godina proizvodnje</label> <br>
+                    <label for=""><i class="fa-regular fa-calendar mt-2 text-icon-small"></i>Godina proizvodnje</label> <br>
                     <div class="godine d-flex gap-3">
                         <select name="years_from" id="years_from" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value="" disabled selected hidden>Od</option>
@@ -87,7 +88,8 @@
                         </select>
                     </div>
 
-                    <label for=""><i class="fa-solid fa-hand-holding-dollar mt-2" style="color: #8a1820; padding-right: 0.5em;"></i> Cijena</label> <br>
+                    <label for=""><i class="fa-solid fa-hand-holding-dollar mt-2"
+                            style="color: #8a1820; padding-right: 0.5em;"></i> Cijena</label> <br>
                     <div class="godine d-flex gap-3">
                         <select name="price_from" id="price_from" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value="" disabled selected hidden>Od</option>
@@ -99,29 +101,35 @@
                         </select>
                     </div>
 
-                    <label for=""><i class="fa-solid fa-bars mt-2" style="color: #8a1820; padding-right: 0.5em;"></i> Kategorije vozila</label>
+                    <label for=""><i class="fa-solid fa-bars mt-2"
+                            style="color: #8a1820; padding-right: 0.5em;"></i> Kategorije vozila</label>
                     <div class="kategorije mt-2">
                         @foreach ($types as $type)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" name={{ 'type'.$type->id }} id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="" name={{ 'type' . $type->id }}
+                                    id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $type->name }}
                                 </label>
-                                <img src="{{ Storage::disk('s3')->url('icons/'.strtolower($type->name)).'.svg' }}" alt="" class="icon">
+                                <img src="{{ Storage::disk('s3')->url('icons/' . strtolower($type->name)) . '.svg' }}"
+                                    alt="" class="icon">
                             </div>
                         @endforeach
 
                     </div>
 
-                    <label for=""><i class="fa-solid fa-filter mt-3" style="color: #8a1820; padding-right: 0.5em;"></i>Ostali filteri</label>
+                    <label for=""><i class="fa-solid fa-filter mt-3"
+                            style="color: #8a1820; padding-right: 0.5em;"></i>Ostali filteri</label>
                     <div class="ostali">
-                        <label for=""><i class="fa-solid fa-gears mt-3" style="color: #8a1820; padding-right: 0.5em;"></i> Mjenjač</label>
+                        <label for=""><i class="fa-solid fa-gears mt-3"
+                                style="color: #8a1820; padding-right: 0.5em;"></i> Mjenjač</label>
                         <select name="gearbox" id="gearbox" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value=""></option>
                             <option value="automatik">Automatik</option>
                             <option value="manuelni">Manuelni</option>
                         </select>
-                        <label for=""><i class="fa-solid fa-gas-pump mt-3" style="color: #8a1820; padding-right: 0.5em;"></i>Gorivo</label>
+                        <label for=""><i class="fa-solid fa-gas-pump mt-3"
+                                style="color: #8a1820; padding-right: 0.5em;"></i>Gorivo</label>
                         <select name="engine_type" id="engine_type" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value=""></option>
                             <option value="benzin">Benzin</option>

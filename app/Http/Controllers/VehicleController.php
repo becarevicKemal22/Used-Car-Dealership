@@ -86,7 +86,7 @@ class VehicleController extends Controller
 
         Cache::forget('all_vehicles');
 
-        return redirect()->route('vozila.index')->with('status', 'Vozilo je uspjesno dodano.');
+        return redirect()->route('vozila.show', ['vozila' => $vehicle->id])->with('status', 'Vozilo je uspjesno dodano.');
     }
 
     /**
@@ -179,7 +179,7 @@ class VehicleController extends Controller
         Cache::forget('all_vehicles');
 
         $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
-        return redirect()->route('vozila.index');
+        return redirect()->route('vozila.show', ['vozila' => $vehicle->id]);
     }
 
     /**
