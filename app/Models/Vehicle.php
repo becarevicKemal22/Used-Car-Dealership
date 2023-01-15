@@ -12,10 +12,17 @@ class Vehicle extends Model
     protected $guarded = ['id'];
 
     public function model(){
-        return $this->belongsTo(VehicleModel::class);
+        return $this->belongsTo('App\Models\VehicleModel', 'vehicle_model_id');
     }
 
     public function images(){
         return $this->hasMany(Image::class);
     }
+
+    //Query scopes
+
+    // public function scopeSortedManufacturer($query, $ascOrDesc){
+    //     $query->
+    // }
+
 }

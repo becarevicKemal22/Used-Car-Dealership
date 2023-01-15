@@ -10,6 +10,7 @@ use App\Models\VehicleModel;
 use App\Models\VehicleType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,11 +23,78 @@ class VehicleController extends Controller
      */
     public function index(Request $request)
     {
-        $vehicles = Cache::get('all_vehicles', function(){
-            $temp = Vehicle::all(); // or add all the queries from the forms or search or whatever should affect cache too.
-            Cache::put('all_vehicles', $temp, now()->addMinutes(30));
-            return $temp;
-        }); 
+        $query = Vehicle::query();
+
+        //Getting the manufacturer names joined onto the vehicles collection so that sorting is available.
+        $modelsTable = DB::table('vehicle_models')->leftJoin('manufacturers', 'manufacturer_id', '=', 'manufacturers.id')->select('vehicle_models.name as vehicle_model_name', 'vehicle_models.id as id_of_vehicle_model', 'vehicle_models.vehicle_type_id as vehicle_type_id', 'manufacturers.name as manufacturer_name', 'manufacturers.id as id_of_manufacturer');
+        $query->joinSub($modelsTable, 'modelsTable', function($join){
+            $join->on('modelsTable.id_of_vehicle_model', '=', 'vehicle_model_id')->selectRaw('`modelsTable`.`manufacturer_name` as manufacturer_name');
+        });
+
+        //Search
+        if($request->query('pretraga')){
+            $query->where('name', 'LIKE', "%{$request->query('pretraga')}%");
+        }
+
+        //Filters
+        if($request->query('manufacturer') != null && $request->query('manufacturer') != 0){
+            $query->where('id_of_manufacturer', 'LIKE', "%{$request->query('manufacturer')}%");
+        }
+
+        if($request->query('vehicle_model_id') != null && $request->query('vehicle_model_id') != 0){
+            $query->where('vehicle_model_id', 'LIKE', "%{$request->query('vehicle_model_id')}%");
+        }
+
+        if($request->query('years_from') != null){
+            $query->where('production_year', '>=', $request->query('years_from'));
+        }
+        
+        if($request->query('years_to') != null){
+            $query->where('production_year', '<=', $request->query('years_to'));
+        }
+        
+        if($request->query('price_from') != null){
+            $query->where('price', '>=', $request->query('price_from'));
+        }
+        
+        if($request->query('price_to') != null){
+            $query->where('price', '<=', $request->query('price_to'));
+        }
+
+        $typeIDs = [];
+        foreach (VehicleType::all() as $type) {
+            if($request->query('type'.$type->id) != null){
+                $typeIDs[] = $type->id;
+            }
+        }
+        if(!empty($typeIDs)){
+            $query->whereHas('model', function($q) use($typeIDs){
+                $q->whereIn('vehicle_type_id', $typeIDs);
+            });
+        }
+
+        if($request->query('gearbox')){
+            $query->where('gearbox', 'LIKE', $request->query('gearbox'));
+        }
+
+        if($request->query('engine_type')){
+            $query->where('engine_type', 'LIKE', $request->query('engine_type'));
+        }
+
+        //Ordering
+        $ascOrDesc = $request->query('desc') ? 'desc' : 'asc';
+
+        if($request->query('sort')){
+            $query->orderBy($request->query('sort'), $ascOrDesc);
+        }
+
+        $vehicles = $query->get();
+
+        // $vehicles = Cache::get('all_vehicles', function(){
+        //     $temp = Vehicle::all(); // or add all the queries from the forms or search or whatever should affect cache too.
+        //     Cache::put('all_vehicles', $temp, now()->addMinutes(30));
+        //     return $temp;
+        // });
 
         $models = VehicleModel::with('manufacturer')->get();
 

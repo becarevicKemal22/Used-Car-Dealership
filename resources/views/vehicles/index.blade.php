@@ -15,22 +15,22 @@
                         </button>
                         <div class="dropdown-menu" id="sortDropdown" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'manufacturer asc'])) }}">Marka
+                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'manufacturer_name', 'desc' => false])) }}">Marka
                                 A-Z</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'manufacturer desc'])) }}">Marka
+                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'manufacturer_name', 'desc' => true])) }}">Marka
                                 Z-A</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'price asc'])) }}">Cijena
+                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'price', 'desc' => false])) }}">Cijena
                                 uzlazna</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'price desc'])) }}">Cijena
+                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'price', 'desc' => true])) }}">Cijena
                                 silazna</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'year asc'])) }}">Godina
+                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'production_year', 'desc' => false])) }}">Godina
                                 proizvodnje: najstarije prvo</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'year desc'])) }}">Godina
+                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'production_year', 'desc' => true])) }}">Godina
                                 proizvodnje: najnovije prvo</a>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                     <div class="kategorije mt-2">
                         @foreach ($types as $type)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value=""
+                                <input class="form-check-input" type="checkbox" value="{{ $type->id }}"
                                     name={{ 'type' . $type->id }} id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $type->name }}
