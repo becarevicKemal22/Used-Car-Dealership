@@ -47,9 +47,9 @@
                     </div>
                 </form>
 
-                <div class="d-flex justify-content-center gap-4 flex-wrap mb-4">
+                <div class="d-flex justify-content-center gap-4 flex-wrap mb-4 align-items-stretch">
                     @foreach ($vehicles as $vehicle)
-                            <x-vehicle-card :$vehicle></x-vehicle-card>
+                        <x-vehicle-card :$vehicle></x-vehicle-card>
                     @endforeach
                 </div>
             </div>
@@ -70,7 +70,8 @@
                         </select> <br>
                     </div>
 
-                    <label for=""><i class="fa-regular fa-calendar mt-2 text-icon-small"></i>Godina proizvodnje</label> <br>
+                    <label for=""><i class="fa-regular fa-calendar mt-2 text-icon-small"></i>Godina
+                        proizvodnje</label> <br>
                     <div class="godine d-flex gap-3">
                         <select name="years_from" id="years_from" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value="" disabled selected hidden>Od</option>
@@ -106,8 +107,8 @@
                     <div class="kategorije mt-2">
                         @foreach ($types as $type)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" name={{ 'type' . $type->id }}
-                                    id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    name={{ 'type' . $type->id }} id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $type->name }}
                                 </label>

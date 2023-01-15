@@ -80,6 +80,14 @@
         </nav>
 
         <main class="py-4">
+            @auth
+                @if (session('status'))
+                    <h5 class="alert alert-success w-75">{{ session('status') }}</h4>
+                @elseif(session('error'))
+                    <h5 class="alert alert-danger w-75">{{ session('error') }}</h5>
+                @endif
+            @endauth
+
             @yield('content')
         </main>
 
@@ -169,7 +177,7 @@
 
     </div>
 
-    
+
 </body>
 
 </html>
