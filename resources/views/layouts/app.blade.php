@@ -24,9 +24,9 @@
     <div id="app" class="d-flex flex-column min-vh-100">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Euro Centar
-                </a>
+                <a class="navbar-brand" href="/">
+                    <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="90" class="d-inline-block align-top" alt="">
+                  </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -40,7 +40,19 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto" style="font-size: 1.25rem; font-weight: bold;">
+                        <li class="nav-item px-2">
+                            <a class="nav-link" href="/"> Početna </a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link" href="/vozila"> Ponuda vozila </a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link" href="/usluge"> Usluge </a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link side-border" href="/kontakt"> Kontakt </a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -56,7 +68,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle dropBtn" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -177,7 +189,24 @@
 
     </div>
 
-
 </body>
+
+<style>
+    .navbar{
+        background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://www.hdcarwallpapers.com/walls/6th_gear_racing_cars-wide.jpg') !important;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+    }
+
+    .nav-link{
+        color: white !important;
+    }
+
+    .side-border{
+        padding-left: 1em !important;
+        border-left: 3px solid #8a1820;
+    }
+</style>
 
 </html>

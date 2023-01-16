@@ -39,6 +39,9 @@ Route::post('/novi_model', [VehicleModelController::class, 'store'])->name('vehi
 Route::get('/novi_tip', [VehicleTypeController::class, 'create'])->name('vehicleTypes.create');
 Route::post('/novi_tip', [VehicleTypeController::class, 'store'])->name('vehicleTypes.store');
 
+Route::view('/kontakt', 'kontakt.blade.php');
+Route::view('/usluge', 'usluge.blade.php');
+
 Auth::routes(['register' => false, 'reset' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
