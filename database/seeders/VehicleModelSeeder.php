@@ -33,6 +33,5 @@ class VehicleModelSeeder extends Seeder
         $renaultClio = VehicleModel::factory()->renaultClio()->make();
         $renaultClio->manufacturer_id = $renaultId;
         $renaultClio->save();
-
     }
 }

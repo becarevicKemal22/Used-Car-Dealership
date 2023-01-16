@@ -17,12 +17,14 @@ class VehicleTypeSeeder extends Seeder
     public function run()
     {
         $types = [
-            'Hatchback',
             'Sedan',
-            'Coupe',
+            'Hatchback',
             'SUV',
-            'Cabriolet',
-            'Pickup',
+            'Coupe',
+            'Limuzina',
+            'Minivan',
+            'Kombi',
+            'Test Type',
         ];
 
         foreach ($types as $type){

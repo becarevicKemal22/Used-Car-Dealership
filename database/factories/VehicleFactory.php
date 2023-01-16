@@ -140,4 +140,23 @@ class VehicleFactory extends Factory
                 "thumbnail" => "",
             ];
     });}
+
+    public function testVehicle(){
+        return $this->state(function(array $attributes){
+            return [
+                'name' => 'Test Vehicle',
+                'price' => '1000',
+                'production_year' => '2005',
+                'kilometers' => 220205,
+                'engine_type' => 'Dizel',
+                'chassis_type' => 'Hatchback',
+                'gearbox' => 'Automatik',
+                'color' => 'Siva',
+                'engine_volume' => '1.6',
+                'engine_strength' => 119,
+                'opis' => 'Ovo je opis ovog auta',
+                'oprema' => 'Centralno daljinsko otkljucavanje/Xenoni/Vazdusni Ovjes/Elektricno podesavanje retrovizora/Parking senzori/Kozni trokraki volan podesiv po dubini i visini sa komandama/ABS/ESP/ISOFIX/Radio CD-MP3/Navigacija/Automatski Mjenjac 7-stepeni/Alu felge R18',
+                "thumbnail" => "testing/slika-1424661-63750eede9d87-velika.jpg",
+            ];
+    });}
 }
