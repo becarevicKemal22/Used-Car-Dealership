@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Models\Vehicle;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class VozilaResponsesTest extends TestCase
@@ -19,8 +20,7 @@ class VozilaResponsesTest extends TestCase
     {
 
         $user = $this->user();
-
-
+        
         //! Cannot test actually creating and editing tests because it returns 405 errors. Could be due to file uploads.
 
         $response = $this->actingAs($user)->get('/vozila/create');
