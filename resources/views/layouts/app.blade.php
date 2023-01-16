@@ -210,7 +210,7 @@
 
 <style>
     .navbar{
-        background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('{{ Storage::disk('s3')->url('assets/banner.webp') }}') !important;
+        background-image: linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65) ), url('{{ Storage::disk('s3')->url('assets/banner.webp') }}') !important;
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
