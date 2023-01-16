@@ -41,6 +41,7 @@ Route::post('/novi_tip', [VehicleTypeController::class, 'store'])->name('vehicle
 
 Route::view('/kontakt', 'kontakt.blade.php');
 Route::view('/usluge', 'usluge.blade.php');
+Route::view('/about', 'about.blade.php');
 
 Auth::routes(['register' => false, 'reset' => false]);
 
