@@ -25,6 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $vehicles = Vehicle::all();
-        return view('home', ['vehicles' => $vehicles]);
+        $latest = Vehicle::latest()->take(3)->get();
+        return view('home', ['vehicles' => $vehicles, 'latest' => $latest]);
     }
 }

@@ -53,6 +53,11 @@
                 </div>
               <div class="col-lg-6 mb-4">
                 <h2 style="font-weight: bold; color:#8a1820;">Najnovije u ponudi</h4>
+                    <div class="d-flex flex-column justify-content-between gap-3 align-items-center">
+                        @foreach ($latest as $vehicle)
+                        <x-vehicle-card-wide :vehicle="$vehicle"></x-vehicle-card-wide>
+                        @endforeach
+                    </div>
             </div>
         </div>
     </div>
