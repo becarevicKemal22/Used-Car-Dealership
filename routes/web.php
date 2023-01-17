@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VehicleModelController;
@@ -26,9 +27,7 @@ if (App::environment('production')) {
     URL::forceScheme('https');
 }
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::resource('vozila', VehicleController::class);
 

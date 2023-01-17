@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => 'card border-0 h-100 vehicle-card' ]) }}>
+<div {{ $attributes->merge(['class' => 'card border-0 h-100' ]) }} id="vehicle-card">
     <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
     <div class="card-body">
         <a href="{{ route('vozila.show', ['vozila' => $vehicle->id]) }}"class="text-black"><h5 class="card-title">{{ $vehicle->name }}</h5></a>
@@ -33,7 +33,8 @@
 </div>
 
 <style>
-    .vehicle-card{
-        width: 16rem;
+    #vehicle-card{
+        width: 14rem;
     }
+
 </style>
