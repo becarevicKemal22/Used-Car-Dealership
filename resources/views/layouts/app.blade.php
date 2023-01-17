@@ -21,12 +21,14 @@
 </head>
 
 <body>
-    <div id="app" class="d-flex flex-column min-vh-100">
-        <nav class="navbar navbar-expand-md navbar-dark bg-white shadow-sm">
+    <div id="app" class="d-flex flex-column min-vh-100 overflow-hidden">
+        <nav
+            class="navbar navbar-expand-md navbar-dark {{ Request::url() == url('/') ? 'transparent fixed-top' : 'bg-white shadow-sm' }}">
             <div class="container">
                 <a class="navbar-brand" href="/">
-                    <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="90" class="d-inline-block align-top" alt="">
-                  </a>
+                    <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="90"
+                        class="d-inline-block align-top" alt="">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -57,11 +59,12 @@
                             <a class="nav-link" href="/kontakt"> Kontakt </a>
                         </li>
                         <!-- Authentication Links -->
-                            
+
                         @auth
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle dropBtn" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle dropBtn" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -83,12 +86,12 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="{{ Request::url() == url('/') ? 'pb-4' : 'py-4' }}">
             @auth
                 @if (session('status'))
                     <h5 class="alert alert-success w-75">{{ session('status') }}</h4>
-                @elseif(session('error'))
-                    <h5 class="alert alert-danger w-75">{{ session('error') }}</h5>
+                    @elseif(session('error'))
+                        <h5 class="alert alert-danger w-75">{{ session('error') }}</h5>
                 @endif
             @endauth
 
@@ -96,17 +99,18 @@
         </main>
 
         <!-- Footer -->
-        <footer class="page-footer font-small text-white blue pt-4 mt-auto" style="background-color:rgba(60, 60, 60, 1)">
+        <footer class="page-footer font-small text-white blue pt-4 mt-auto"
+            style="background-color:rgba(60, 60, 60, 1)">
 
             <!-- Footer Links -->
             <div class="container-fluid text-center text-md-left mt-4">
 
                 <!-- Grid row -->
                 <div class="row">
-                    <div class="col-md-1 mb-md-0 mb-3">
+                    <div class="col-lg-1 mb-lg-0 mb-3">
 
                     </div>
-                    <div class="col-md-2 mb-md-0 mb-3">
+                    <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
                         <h5 class="text-uppercase mb-3">Navigacija</h5>
@@ -144,7 +148,7 @@
 
                     </div>
                     <!-- Grid column -->
-                    <div class="col-md-2 mb-md-0 mb-3">
+                    <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
                         <h5 class="text-uppercase mb-3">Kontakt</h5>
@@ -160,7 +164,7 @@
 
                     </div>
                     <!-- Grid column -->
-                    <div class="col-md-2 mb-md-0 mb-3">
+                    <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
                         <h5 class="text-uppercase">Radno vrijeme</h5>
@@ -179,12 +183,13 @@
 
                     </div>
                     <!-- Grid column -->
-                    <div class="col-md-2 mt-md-0 mt-3">
+                    <div class="col-lg-2 mt-lg-0 mt-3">
 
                         <!-- Content -->
-                        <div class="d-flex gap-4 align-items-center justify-content-end">
+                        <div class="d-flex gap-4 align-items-center justify-content-start">
                             <a href="" style="font-size: 2.5em"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em"><i
+                                    class="fa-brands fa-facebook"></i></a>
                             <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="65">
                         </div>
 
@@ -209,18 +214,22 @@
 </body>
 
 <style>
-    .navbar{
-        background-image: linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65) ), url('{{ Storage::disk('s3')->url('assets/banner.webp') }}') !important;
+    .navbar:not(.transparent) {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('{{ Storage::disk('s3')->url('assets/banner.webp') }}') !important;
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
     }
 
-    .nav-link{
+    .transparent {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.0));
+    }
+
+    .nav-link {
         color: white !important;
     }
 
-    .page-footer a{
+    .page-footer a {
         color: white !important;
     }
 </style>

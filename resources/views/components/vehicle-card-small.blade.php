@@ -1,8 +1,8 @@
-<div {{ $attributes->merge(['class' => 'card border-0 h-100 vehicle-card']) }}>
-    <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
-    @if ($vehicle->discount_price > 0)
-        <span class="discount"></span>
-    @endif
+<div {{ $attributes->merge(['class' => 'card border-0 h-100']) }} id="vehicle-card">
+        <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
+        @if ($vehicle->discount_price > 0)
+            <span class="discount"></span>
+        @endif
     <div class="card-body">
         <a href="{{ route('vozila.show', ['vozila' => $vehicle->id]) }}"class="text-black">
             <h5 class="card-title">{{ $vehicle->name }}</h5>
@@ -33,7 +33,6 @@
         <div class="d-flex align-items-center justify-content-between">
             <h6 style="margin-top: 2px;"> <i class="fa-solid fa-gauge"></i> {{ number_format($vehicle->kilometers, 0) }}
             </h6>
-
             @if ($vehicle->discount_price != null && $vehicle->discount_price > 0)
                 <div class="d-flex flex-column align-items-end gap-0">
                     <strike>
@@ -49,8 +48,9 @@
 </div>
 
 <style>
-    .vehicle-card {
-        width: 16rem;
+    #vehicle-card {
+        width: 14rem;
+        position: relative;
     }
 
     .discount {
