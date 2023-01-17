@@ -107,10 +107,10 @@
 
                 <!-- Grid row -->
                 <div class="row">
-                    <div class="col-md-1 mb-md-0 mb-3">
+                    <div class="col-lg-1 mb-lg-0 mb-3">
 
                     </div>
-                    <div class="col-md-2 mb-md-0 mb-3">
+                    <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
                         <h5 class="text-uppercase mb-3">Navigacija</h5>
@@ -148,7 +148,7 @@
 
                     </div>
                     <!-- Grid column -->
-                    <div class="col-md-2 mb-md-0 mb-3">
+                    <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
                         <h5 class="text-uppercase mb-3">Kontakt</h5>
@@ -164,7 +164,7 @@
 
                     </div>
                     <!-- Grid column -->
-                    <div class="col-md-2 mb-md-0 mb-3">
+                    <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
                         <h5 class="text-uppercase">Radno vrijeme</h5>
@@ -183,10 +183,10 @@
 
                     </div>
                     <!-- Grid column -->
-                    <div class="col-md-2 mt-md-0 mt-3">
+                    <div class="col-lg-2 mt-lg-0 mt-3">
 
                         <!-- Content -->
-                        <div class="d-flex gap-4 align-items-center justify-content-end">
+                        <div class="d-flex gap-4 align-items-center justify-content-start">
                             <a href="" style="font-size: 2.5em"><i class="fa-brands fa-instagram"></i></a>
                             <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em"><i
                                     class="fa-brands fa-facebook"></i></a>
