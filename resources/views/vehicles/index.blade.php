@@ -95,10 +95,34 @@
                         <select name="price_from" id="price_from" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value="" disabled selected hidden>Od</option>
                             <option value=""></option>
+                            <option value="5000">5,000</option>
+                            <option value="10000">10,000</option>
+                            <option value="15000">15,000</option>
+                            <option value="20000">20,000</option>
+                            <option value="25000">25,000</option>
+                            <option value="30000">30,000</option>
+                            <option value="35000">35,000</option>
+                            <option value="40000">40,000</option>
+                            <option value="45000">45,000</option>
+                            <option value="50000">50,000</option>
+                            <option value="60000">60,000</option>
+                            <option value="70000">70,000</option>
                         </select>
                         <select name="price_to" id="price_to" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value="" disabled selected hidden>Do</option>
                             <option value=""></option>
+                            <option value="5000">5,000</option>
+                            <option value="10000">10,000</option>
+                            <option value="15000">15,000</option>
+                            <option value="20000">20,000</option>
+                            <option value="25000">25,000</option>
+                            <option value="30000">30,000</option>
+                            <option value="35000">35,000</option>
+                            <option value="40000">40,000</option>
+                            <option value="45000">45,000</option>
+                            <option value="50000">50,000</option>
+                            <option value="60000">60,000</option>
+                            <option value="70000">70,000</option>
                         </select>
                     </div>
 
@@ -228,8 +252,7 @@
 
         // Close the dropdown menu if the user clicks outside of it
         window.onclick = function(event) {
-            if (!event.target.classList.contains('dropBtn')) {
-                console.log(event.target.classList.contains('dropBtn'));
+            if (!event.target.closest('.dropBtn')) {
                 let dropdowns = document.getElementsByClassName("dropdown-menu");
                 let i;
                 for (i = 0; i < dropdowns.length; i++) {

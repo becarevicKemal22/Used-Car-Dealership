@@ -86,6 +86,8 @@ class VehicleController extends Controller
 
         if($request->query('sort')){
             $query->orderBy($request->query('sort'), $ascOrDesc);
+        }else{
+            $query->orderBy('manufacturer_name', 'asc');
         }
 
         $vehicles = $query->get();

@@ -20,6 +20,7 @@
 
                     <h6><i class="fa-solid fa-gas-pump mt-2 text-icon-small"></i>{{ $vehicle->engine_type }}</h6>
                 </div>
+                <a href="{{ route('vozila.show', ['vozila' => $vehicle->id]) }}" class="stretched-link"></a>
             </div>
         </div>
 
