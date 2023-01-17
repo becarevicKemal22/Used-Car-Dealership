@@ -126,6 +126,10 @@ class VehicleController extends Controller
         $validated = $request->validated();
         $vehicle = Vehicle::make($validated);
 
+        Cache::forget('all_vehicles');
+        Cache::forget('latest-vehicles');
+        Cache::forget('discounted-vehicles');
+
         if (!app()->isProduction()) {
             $additionToPath = 'local/';
         } else {
@@ -151,10 +155,6 @@ class VehicleController extends Controller
         }
 
         $vehicle->save();
-
-        Cache::forget('all_vehicles');
-        Cache::forget('latest-vehicles');
-        Cache::forget('discounted-vehicles');
 
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id])->with('status', 'Vozilo je uspjesno dodano.');
     }
@@ -204,6 +204,12 @@ class VehicleController extends Controller
     public function update(StoreVehicle $request, $id)
     {
         $vehicle = Vehicle::findOrFail($id);
+
+        Cache::forget($id);
+        Cache::forget('all_vehicles');
+        Cache::forget('latest-vehicles');
+        Cache::forget('discounted-vehicles');
+
         $thumbnail_path = $vehicle->thumbnail;
         $images = $vehicle->images()->get();
         $validated = $request->validated();
@@ -245,10 +251,6 @@ class VehicleController extends Controller
 
         $vehicle->save();
 
-        Cache::forget($vehicle->id);
-        Cache::forget('all_vehicles');
-        Cache::forget('discounted-vehicles');
-
         $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id]);
     }
@@ -264,9 +266,9 @@ class VehicleController extends Controller
         Gate::authorize('vehicles.delete');
         $vehicle = Vehicle::findOrFail($id);
 
-        Storage::delete($vehicle->thumbnail);
+        Storage::disk('s3')->delete($vehicle->thumbnail);
 
-        Cache::forget($vehicle->id);
+        Cache::forget($id);
         Cache::forget('all_vehicles');
         Cache::forget('latest-vehicles');
         Cache::forget('discounted-vehicles');
