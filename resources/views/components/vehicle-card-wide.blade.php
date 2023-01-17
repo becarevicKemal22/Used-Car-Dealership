@@ -28,7 +28,16 @@
                 <h6 style="margin-top: 2px;"> <i class="fa-solid fa-gauge"></i>
                     {{ number_format($vehicle->kilometers, 0) }}
                 </h6>
-                <h5>{{ number_format($vehicle->price, 0) . ' KM' }}</h5>
+                @if ($vehicle->discount_price != null && $vehicle->discount_price > 0)
+                    <div class="d-flex flex-column align-items-end gap-0">
+                        <strike>
+                            <h6 style="margin-bottom: 0;">{{ number_format($vehicle->price, 0) . ' KM' }}</h6>
+                        </strike>
+                        <h5>{{ number_format($vehicle->discount_price, 0) . ' KM' }}</h5>
+                    </div>
+                @else
+                    <h5>{{ number_format($vehicle->price, 0) . ' KM' }}</h5>
+                @endif
             </div>
         </div>
     </div>

@@ -153,6 +153,8 @@ class VehicleController extends Controller
         $vehicle->save();
 
         Cache::forget('all_vehicles');
+        Cache::forget('latest-vehicles');
+        Cache::forget('discounted-vehicles');
 
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id])->with('status', 'Vozilo je uspjesno dodano.');
     }
@@ -245,6 +247,7 @@ class VehicleController extends Controller
 
         Cache::forget($vehicle->id);
         Cache::forget('all_vehicles');
+        Cache::forget('discounted-vehicles');
 
         $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id]);
@@ -265,6 +268,8 @@ class VehicleController extends Controller
 
         Cache::forget($vehicle->id);
         Cache::forget('all_vehicles');
+        Cache::forget('latest-vehicles');
+        Cache::forget('discounted-vehicles');
 
         $images = $vehicle->images();
 

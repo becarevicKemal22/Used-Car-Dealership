@@ -4,6 +4,9 @@
 <label for="price">Cijena: </label>
 <input type="text" name="price" id="price" value="{{ $vehicle->price ?? '' }}"> <br>
 
+<label for="discount_price">Akcijska cijena: </label>
+<input type="text" name="discount_price" id="discount_price" value="{{ $vehicle->discount_price ?? '' }}"> <br>
+
 <label for="production_year">Godina proizvodnje: </label>
 <input type="number" name="production_year" id="production_year" value="{{ $vehicle->production_year ?? '' }}"> <br>
 
