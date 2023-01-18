@@ -19,10 +19,7 @@ class Vehicle extends Model
         return $this->hasMany(Image::class);
     }
 
-    //Query scopes
-
-    // public function scopeSortedManufacturer($query, $ascOrDesc){
-    //     $query->
-    // }
-
+    public function equipment(){
+        return $this->belongsToMany(Equipment::class);
+    }
 }

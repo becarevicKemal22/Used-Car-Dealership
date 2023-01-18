@@ -39,7 +39,6 @@ class StoreVehicle extends FormRequest
             'engine_strength' => 'required|numeric',
             'drive' => 'nullable|string',
             'opis' => 'nullable|string',
-            'oprema' => 'required|string',
             'vehicle_model_id' =>'nullable|integer',
             'thumbnail' => 'required|image',
         ];

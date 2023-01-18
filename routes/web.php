@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\VehicleController;
@@ -39,6 +40,9 @@ Route::post('/novi_model', [VehicleModelController::class, 'store'])->name('vehi
 
 Route::get('/novi_tip', [VehicleTypeController::class, 'create'])->name('vehicleTypes.create');
 Route::post('/novi_tip', [VehicleTypeController::class, 'store'])->name('vehicleTypes.store');
+
+Route::get('/nova_oprema', [EquipmentController::class, 'create'])->name('equipment.create');
+Route::post('/nova_oprema', [EquipmentController::class, 'store'])->name('equipment.store');
 
 Route::view('/kontakt', 'kontakt.blade.php');
 Route::view('/usluge', 'usluge.blade.php');

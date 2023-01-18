@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVehicle;
+use App\Models\Equipment;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
@@ -113,8 +114,9 @@ class VehicleController extends Controller
     public function create()
     {
         $this->authorize('vehicles.create');
+        $equipment = Equipment::all();
         $models = VehicleModel::with('manufacturer')->get();
-        return view('vehicles.create', ['models' => $models]);
+        return view('vehicles.create', ['models' => $models, 'equipment' => $equipment]);
     }
 
     /**
@@ -170,7 +172,7 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = Cache::get($id, function() use($id){
-            $temp = Vehicle::findOrFail($id);
+            $temp = Vehicle::with('equipment')->findOrFail($id);
             Cache::put($id, $temp, now()->addMinutes(30));
             return $temp;
         });
@@ -191,9 +193,10 @@ class VehicleController extends Controller
     public function edit($id)
     {
         $this->authorize('vehicles.update');
-        $vehicle = Vehicle::findOrFail($id);
+        $vehicle = Vehicle::with('equipment')->findOrFail($id);
         $models = VehicleModel::with('manufacturer')->get();
-        return view('vehicles.edit', ['vehicle' => $vehicle, 'models' => $models]);
+        $equipment = Equipment::all();
+        return view('vehicles.edit', ['vehicle' => $vehicle, 'models' => $models, 'equipment' => $equipment]);
     }
 
     /**
@@ -250,6 +253,16 @@ class VehicleController extends Controller
                 $image->save();
             }
         }
+
+        $equipment = Equipment::all();
+        $equipmentIDs = [];
+        foreach ($equipment as $eq) {
+            if($request->has('equipment'. $eq->id)){
+                $equipmentIDs[] = $eq->id;
+            }
+        }
+
+        $vehicle->equipment()->sync($equipmentIDs);
 
         $vehicle->save();
 
