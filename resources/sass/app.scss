@@ -175,3 +175,8 @@ a{
     padding: 0.75em;
     border-block: 2px solid $primary;
   }
+
+  .current-page{
+    background-color: $primary;
+    border-radius: 5px;
+  }
