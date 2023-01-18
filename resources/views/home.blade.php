@@ -37,14 +37,7 @@
         </div>
     @endif
     <div class="container mt-4">
-        <div class="row p-4 gx-5">
-            <div class="col-lg-6 mb-4">
-                <h2 style="font-weight: bold; color:#8a1820;">Naša lokacija</h4>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2052.4905700785116!2d18.3168698618783!3d43.84299663868699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758ca8c9a8e0a5b%3A0x8d64a55011bf4213!2sEUROCENTAR%20D.O.O.!5e0!3m2!1sen!2sba!4v1673920043317!5m2!1sen!2sba"
-                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+        <div class="row p-4 gx-5 flex-row-reverse">
             <div class="col-lg-6 mb-4">
                 <h2 style="font-weight: bold; color:#8a1820;">Najnovije u ponudi</h4>
                     <div class="d-flex flex-column justify-content-between gap-3 align-items-center">
@@ -52,6 +45,13 @@
                             <x-vehicle-card-wide :vehicle="$vehicle"></x-vehicle-card-wide>
                         @endforeach
                     </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <h2 style="font-weight: bold; color:#8a1820;">Naša lokacija</h4>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2052.4905700785116!2d18.3168698618783!3d43.84299663868699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758ca8c9a8e0a5b%3A0x8d64a55011bf4213!2sEUROCENTAR%20D.O.O.!5e0!3m2!1sen!2sba!4v1673920043317!5m2!1sen!2sba"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>
