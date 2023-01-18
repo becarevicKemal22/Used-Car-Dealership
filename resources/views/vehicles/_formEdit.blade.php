@@ -1,3 +1,4 @@
+<div style="margin-left: 20px">
 <label for="name">Ime vozila: </label>
 <input type="text" name="name" id="name" value="{{ $vehicle->name ?? '' }}"> <br>
 
@@ -42,9 +43,15 @@
 <label for="opis">Opis: </label> <br>
 <textarea name="opis" id="opis" cols="30" rows="10">{{ $vehicle->opis ?? '' }}</textarea> <br>
 
-<label for="oprema">Oprema: </label> <br>
-<textarea name="oprema" id="oprema" cols="30" rows="10">{{ $vehicle->oprema ?? '' }}</textarea> <br>
-
+@foreach ($equipment as $item)
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="{{ $item->id }}" name={{ 'equipment' . $item->id }}
+            id="flexCheckDefault" <?php echo $vehicle->equipment->contains('id', $item->id) ? 'checked' : ''?> >
+        <label class="form-check-label" for="flexCheckDefault">
+            {{ $item->equipment_name }}
+        </label>
+    </div>
+@endforeach
 
 @php
     use Illuminate\Support\Facades\DB;
@@ -80,6 +87,8 @@
     <input type="file" name="photos[]" id="photos[]" class="form-control-file" multiple>
 </div>
 
+</div>
+
 @if ($errors->any())
     @foreach ($errors->all() as $error)
         <p style="color:red">{{ $error }}</p>
@@ -110,7 +119,7 @@
             let option = document.createElement('option');
             option.value = element.id;
             option.text = element.name;
-            
+
             if (model_id == element.id) {
                 option.selected = true;
             }
