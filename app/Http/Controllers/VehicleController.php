@@ -158,7 +158,17 @@ class VehicleController extends Controller
             }
         }
 
+        $equipment = Equipment::all();
+        $equipmentIDs = [];
+        foreach ($equipment as $eq) {
+            if($request->has('equipment'. $eq->id)){
+                $equipmentIDs[] = $eq->id;
+            }
+        }
+        
         $vehicle->save();
+        
+        $vehicle->equipment()->sync($equipmentIDs);
 
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id])->with('status', 'Vozilo je uspjesno dodano.');
     }

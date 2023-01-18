@@ -29,7 +29,11 @@ return new class extends Migration
             $table->integer('engine_strength');
             $table->string('drive', 16)->nullable();
             $table->text('opis');
-            $table->text('oprema');
+            if(config('app.env') == 'testing'){
+                $table->text('oprema')->nullable()->default("");
+            }else{    
+                $table->text('oprema');
+            }
             $table->unsignedBigInteger('vehicle_model_id')->index()->nullable();
             $table->foreign('vehicle_model_id')->references('id')->on('vehicle_models')->onDelete('set null');
 
