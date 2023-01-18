@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('vehicles', function (Blueprint $table) {
-            $table->dropColumn('oprema');
+            if(config('app.env') != 'testing'){
+                $table->dropColumn('oprema');
+            }
         });
     }
 
@@ -26,7 +28,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('vehicles', function (Blueprint $table) {
-            $table->text('oprema');
+            if(config('app.env') != 'testing'){
+                $table->text('oprema');
+            }
         });
     }
 };
