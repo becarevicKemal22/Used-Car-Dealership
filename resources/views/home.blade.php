@@ -56,7 +56,6 @@
         </div>
     </div>
 
-
     <style>
         .slideshow-container {
             width: 100%;
@@ -95,12 +94,6 @@
             left: 50%;
             transform: translateX(-50%);
         }
-
-        /* Fading animation */
-        /* .fade {
-                                animation-name: fade;
-                                animation-duration: 1.5s;
-                            } */
 
         @keyframes fade {
             from {
