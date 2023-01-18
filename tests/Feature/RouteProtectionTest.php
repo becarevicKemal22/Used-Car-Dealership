@@ -21,6 +21,9 @@ class RouteProtectionTest extends TestCase
         $response->assertStatus(403);
         $response = $this->get('/novi_tip');
         $response->assertStatus(403);
+        $response = $this->get('/nova_oprema');
+        //Here it is 302 because the controller is using auth middleware which redirects to login page.
+        $response->assertStatus(302);
         $response = $this->get('/vozila/create');
         $response->assertStatus(403);
         $response = $this->get('/vozila/1/edit');
