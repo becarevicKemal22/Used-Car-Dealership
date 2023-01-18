@@ -37,7 +37,6 @@ class VehicleFactory extends Factory
                 'engine_strength' => 120,
                 'drive' => 'Prednji',
                 'opis' => 'Ovo je opis ovog vozila',
-                'oprema' => 'ABS/Airbag/Centralna Brava/Daljinsko Otkljucavanje/Digitalna Klima/ ESP/ El. Podizaci Stakala/ Elektricni Retrovizori/ISOFIX/Klima/Komande na volanu/Metalik/Naslon za ruku/Navigacija/Ocarinjen/Servisna Knjiga/Servo volan/ Start-stop sistem/Tempomat/Touch Screen (ekran)/Turbo',
                 "thumbnail" => "",
             ];
     });}
@@ -73,7 +72,6 @@ class VehicleFactory extends Factory
                 
                 Prešao 227.000 km
                 Servisna knjiga (vozilo redovno održavano i servisirano u ovlaštenom servisu)',
-                'oprema' => 'ABS/ESP/XENONI/Tempomat/Kozni trokraki volan sa komandama/El. podizaci stakala x4/Elektricno podesavanje retrovizora sa zmigavcima/Grijaci u retrovizorima/Parking Senzori nazad/Naslon za ruku/El podesiva kozna sjedista/Navigacija/AUX/USB/ISOFIX/Manuelni mjenjac 6+R/Alu Felge R18',
                 "thumbnail" => "",
             ];
     });}
@@ -103,7 +101,6 @@ class VehicleFactory extends Factory
                 
                 Prešao 334.000 km
                 Servisna knjiga',
-                'oprema' => 'Centralno daljinsko otkljucavanje/Xenoni/Vazdusni Ovjes/Elektricno podesavanje retrovizora/Parking senzori/Kozni trokraki volan podesiv po dubini i visini sa komandama/ABS/ESP/ISOFIX/Radio CD-MP3/Navigacija/Automatski Mjenjac 7-stepeni/Alu felge R18',
                 "thumbnail" => "",
             ];
     });}
@@ -136,7 +133,6 @@ class VehicleFactory extends Factory
         
                 Prešao 199.000 km
                 Servisna knjiga (vozilo redovno održavano i servisirano u ovlaštenom servisu)',
-                'oprema' => 'Centralna brava/Kozni trokraki podesivi volan sa komandama/El. podizaci stakala/Klima/CD-MP3 radio/Navigacija/ABS/ESP/ISOFIX/Manuelni mjenjac 5+R/Felge R15',
                 "thumbnail" => "",
             ];
     });}
@@ -155,7 +151,6 @@ class VehicleFactory extends Factory
                 'engine_volume' => '1.6',
                 'engine_strength' => 119,
                 'opis' => 'Ovo je opis ovog auta',
-                'oprema' => 'Centralno daljinsko otkljucavanje/Xenoni/Vazdusni Ovjes/Elektricno podesavanje retrovizora/Parking senzori/Kozni trokraki volan podesiv po dubini i visini sa komandama/ABS/ESP/ISOFIX/Radio CD-MP3/Navigacija/Automatski Mjenjac 7-stepeni/Alu felge R18',
                 "thumbnail" => "testing/slika-1424661-63750eede9d87-velika.jpg",
             ];
     });}

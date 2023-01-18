@@ -8,6 +8,7 @@ use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use App\Models\VehicleType;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Artisan;
 
@@ -16,6 +17,8 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
  
     use DatabaseMigrations;
+
+    use RefreshDatabase;
 
     public function setUp(): void
     {
@@ -41,8 +44,6 @@ abstract class TestCase extends BaseTestCase
         $testVehicle->save();
 
         $this->withoutVite();
-
-        // $this->artisan('db:seed');
     }
 
     public function user(){

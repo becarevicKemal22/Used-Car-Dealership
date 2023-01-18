@@ -131,6 +131,16 @@
                         @endfor
                     </div>
                 </div>
+                @auth
+                <div class="d-flex gap-2">
+                    <a href="{{ route('vozila.edit', $vehicle->id) }}" class="btn btn-primary">Edit </a>
+                    <form action="{{ route('vozila.destroy', $vehicle->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Brisi</button>
+                    </form>
+                </div>
+                @endauth
             </div>
         </div>
         @if (count($latest) >= 2)
@@ -147,18 +157,6 @@
             </div>
         @endif
     </div>
-    {{-- <h1>{{ $vehicle->name }}</h1>
-    <img src="{{ $thumbnail }}" alt="">
-    <h1>Ostale slike</h1>
-    <form action="{{ route('vozila.destroy', $vehicle->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Brisi</button>
-    </form>
-    --}}
-    {{-- @foreach ($imagePaths as $path)
-        <img src="{{ $path }}" alt="">
-    @endforeach --}}
 
     <script>
         let idx = 0;
