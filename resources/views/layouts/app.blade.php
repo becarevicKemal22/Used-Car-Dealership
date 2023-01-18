@@ -44,18 +44,18 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto" style="font-size: 1.25rem; font-weight: bold;">
                         <li class="nav-item px-2">
-                            <a class="nav-link" href="/"> Početna </a>
+                            <a class="nav-link {{ Request::url() == url('/')  ? 'current-page' : '' }}" href="/"> Početna </a>
                         </li>
                         <li class="nav-item px-2">
-                            <a class="nav-link" href="/vozila"> Ponuda vozila </a>
+                            <a class="nav-link {{ Request::url() == url('/vozila')  ? 'current-page' : '' }}" href="/vozila"> Ponuda vozila </a>
                         </li>
-                        <li class="nav-item px-2">
+                        <li class="nav-item px-2 {{ Request::url() == url('/usluge')  ? 'current-page' : '' }}">
                             <a class="nav-link" href="/usluge"> Usluge </a>
                         </li>
                         <li class="nav-item px-2">
-                            <a class="nav-link" href="/about"> O nama </a>
+                            <a class="nav-link {{ Request::url() == url('/about')  ? 'current-page' : '' }}" href="/about"> O nama </a>
                         </li>
-                        <li class="nav-item px-2">
+                        <li class="nav-item px-2 {{ Request::url() == url('/kontakt')  ? 'current-page' : '' }}">
                             <a class="nav-link" href="/kontakt"> Kontakt </a>
                         </li>
                         <!-- Authentication Links -->
