@@ -43,3 +43,135 @@ a{
     padding-right: 0.4em;
     color: #8a1820;
 }
+
+.overlay-dots {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor:pointer;
+  }
+
+.dots-icon{
+    font-size: 6em;
+    color: rgb(177, 177, 177);
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  cursor:pointer;
+}
+
+.image-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
+  
+  .image-modal-content {
+    width: 80%;
+    max-width: 900px;
+  }
+
+  .visible{
+    display: block;
+  }
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+  }
+
+  .image-modal-close {
+    position: absolute;
+    top: 3%;
+    left: 97%;
+    color: white;
+    transform: translate(-50%);
+    font-size: 1.75rem;
+    cursor: pointer;
+  }
+
+  .overlay-chevron {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    color: $primary;
+    font-size: 2rem;
+    background-color: white;
+    padding: 0.2em;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .overlay-chevron-left{
+    left: 10%;
+  }
+
+  .overlay-chevron-right{
+    left: 90%;
+  }
+
+  @media (max-width: 768px) {
+    .overlay-chevron {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        color: $primary;
+        font-size: 1.2rem;
+        background-color: white;
+        padding: 0.25em;
+        border-radius: 5px;
+      }
+    
+      .overlay-chevron-left{
+        left: 10%;
+      }
+    
+      .overlay-chevron-right{
+        left: 90%;
+      }
+
+      .image-modal-close {
+        top: 5%;
+        left: 95%;
+        color: white;
+      }    
+
+      .image-modal-content {
+        width: 70%;
+      }
+  }
+
+  .pi-4{
+    padding-inline: 4em !important;
+  }
+
+  .bold-text{
+    font-weight: bold !important;
+    color: $primary;
+  }
+
+  .borders-top-bottom{
+    padding: 0.75em;
+    border-block: 2px solid $primary;
+  }

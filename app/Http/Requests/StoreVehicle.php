@@ -27,7 +27,7 @@ class StoreVehicle extends FormRequest
         return [
             'name' =>'required|max:255',
             'price' => 'required',
-            'discount_price' => 'numeric',
+            'discount_price' => '',
             'production_year' => 'required|numeric',
             'kilometers' => 'required|numeric',
             'engine_type' =>'required|string',
