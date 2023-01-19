@@ -52,6 +52,7 @@
         #vehicle-card {
             width: 14rem;
             position: relative;
+            overflow: hidden;
         }
 
         .discount {
