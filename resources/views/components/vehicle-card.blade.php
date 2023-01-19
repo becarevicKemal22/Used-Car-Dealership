@@ -31,7 +31,7 @@
         </div>
         <div class="card-footer text-white bg-primary pb-0">
             <div class="d-flex align-items-center justify-content-between">
-                <h6 style="margin-top: 2px;"> <i class="fa-solid fa-gauge"></i>
+                <h6 style="margin-top: 2px;"> <i class="fa-solid fa-gauge-simple"></i>
                     {{ number_format($vehicle->kilometers, 0) }}
                 </h6>
 

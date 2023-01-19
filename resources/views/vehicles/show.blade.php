@@ -58,7 +58,7 @@
                     @else
                         <h3 class="bold-text"><i class="fa-solid fa-money-bill-wave" style="padding-right: 0.5em;"></i>{{ number_format($vehicle->price, 0) . ' KM' }}</h3>
                     @endif
-                    <h3 class="bold-text"><i class="fa-solid fa-gauge"></i> {{ number_format($vehicle->kilometers, 0) }}
+                    <h3 class="bold-text"><i class="fa-solid fa-gauge-simple"></i> {{ number_format($vehicle->kilometers, 0) }}
                     </h3>
                 </div>
                 <div class="d-flex justify-content-between flex-wrap mt-3 borders-top-bottom">
