@@ -27,9 +27,6 @@ class HomeController extends Controller
         $vehicles = Vehicle::all();
 
         $latest = Vehicle::whereNotIn('status', ['u_dolasku'])->orWhere('status', '=', null)->latest()->take(3)->get();
-        foreach ($latest as $vehicle) {
-            $vehicle->status = "new";
-        }
 
         $discounted_vehicles = Vehicle::where('discount_price', '>', 0)->take(5)->get();
 

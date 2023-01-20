@@ -54,12 +54,11 @@
             </label>
         </div>
     @endforeach
-
     <input class="form-check-input" type="checkbox" value="1" name="uDolasku"
-        id="flexCheckDefault">
+        id="flexCheckDefault" <?php echo ($vehicle->status == "u_dolasku") ? 'checked' : ''; ?>>
     <label class="form-check-label" for="flexCheckDefault">
         U dolasku?
-    </label>
+    </label> <br>
 
     @php
         use Illuminate\Support\Facades\DB;
