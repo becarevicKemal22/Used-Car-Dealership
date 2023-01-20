@@ -26,18 +26,13 @@ class HomeController extends Controller
     {
         $vehicles = Vehicle::all();
 
-        $latest = Cache::get('latest-vehicles', function () {
-            $temp = Vehicle::latest()->take(3)->get();
-            Cache::put('latest-vehicles', $temp, now()->addMinutes(30));
-            return $temp;
-        });
+        $latest = Vehicle::whereNotIn('status', ['u_dolasku'])->orWhere('status', '=', null)->latest()->take(3)->get();
+        foreach ($latest as $vehicle) {
+            $vehicle->status = "new";
+        }
 
-        $discounted_vehicles = Cache::get('discounted-vehicles', function () {
-            $temp = Vehicle::where('discount_price', '>', 0)->take(5)->get();
-            Cache::put('discounted-vehicles', $temp, now()->addMinutes(30));
-            return $temp;
-        });
-        
+        $discounted_vehicles = Vehicle::where('discount_price', '>', 0)->take(5)->get();
+
         return view('home', ['vehicles' => $vehicles, 'latest' => $latest, 'discounted_vehicles' => $discounted_vehicles]);
     }
 }

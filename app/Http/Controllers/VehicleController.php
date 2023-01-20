@@ -28,66 +28,66 @@ class VehicleController extends Controller
 
         //Getting the manufacturer names joined onto the vehicles collection so that sorting is available.
         $modelsTable = DB::table('vehicle_models')->leftJoin('manufacturers', 'manufacturer_id', '=', 'manufacturers.id')->select('vehicle_models.name as vehicle_model_name', 'vehicle_models.id as id_of_vehicle_model', 'vehicle_models.vehicle_type_id as vehicle_type_id', 'manufacturers.name as manufacturer_name', 'manufacturers.id as id_of_manufacturer');
-        $query->joinSub($modelsTable, 'modelsTable', function($join){
+        $query->joinSub($modelsTable, 'modelsTable', function ($join) {
             $join->on('modelsTable.id_of_vehicle_model', '=', 'vehicle_model_id')->selectRaw('`modelsTable`.`manufacturer_name` as manufacturer_name');
         });
 
         //Search
-        if($request->query('pretraga')){
+        if ($request->query('pretraga')) {
             $query->where('name', 'LIKE', "%{$request->query('pretraga')}%");
         }
 
         //Filters
-        if($request->query('manufacturer') != null && $request->query('manufacturer') != 0){
+        if ($request->query('manufacturer') != null && $request->query('manufacturer') != 0) {
             $query->where('id_of_manufacturer', 'LIKE', "%{$request->query('manufacturer')}%");
         }
 
-        if($request->query('vehicle_model_id') != null && $request->query('vehicle_model_id') != 0){
+        if ($request->query('vehicle_model_id') != null && $request->query('vehicle_model_id') != 0) {
             $query->where('vehicle_model_id', 'LIKE', "%{$request->query('vehicle_model_id')}%");
         }
 
-        if($request->query('years_from') != null){
+        if ($request->query('years_from') != null) {
             $query->where('production_year', '>=', $request->query('years_from'));
         }
-        
-        if($request->query('years_to') != null){
+
+        if ($request->query('years_to') != null) {
             $query->where('production_year', '<=', $request->query('years_to'));
         }
-        
-        if($request->query('price_from') != null){
+
+        if ($request->query('price_from') != null) {
             $query->where('price', '>=', $request->query('price_from'));
         }
-        
-        if($request->query('price_to') != null){
+
+        if ($request->query('price_to') != null) {
             $query->where('price', '<=', $request->query('price_to'));
         }
 
         $typeIDs = [];
         foreach (VehicleType::all() as $type) {
-            if($request->query('type'.$type->id) != null){
+            if ($request->query('type' . $type->id) != null) {
                 $typeIDs[] = $type->id;
             }
         }
-        if(!empty($typeIDs)){
-            $query->whereHas('model', function($q) use($typeIDs){
+        if (!empty($typeIDs)) {
+            $query->whereHas('model', function ($q) use ($typeIDs) {
                 $q->whereIn('vehicle_type_id', $typeIDs);
             });
         }
 
-        if($request->query('gearbox')){
+        if ($request->query('gearbox')) {
             $query->where('gearbox', 'LIKE', $request->query('gearbox'));
         }
 
-        if($request->query('engine_type')){
+        if ($request->query('engine_type')) {
             $query->where('engine_type', 'LIKE', $request->query('engine_type'));
         }
 
         //Ordering
         $ascOrDesc = $request->query('desc') ? 'desc' : 'asc';
 
-        if($request->query('sort')){
+        if ($request->query('sort')) {
             $query->orderBy($request->query('sort'), $ascOrDesc);
-        }else{
+        } else {
             $query->orderBy('manufacturer_name', 'asc');
         }
 
@@ -102,8 +102,10 @@ class VehicleController extends Controller
         $models = VehicleModel::with('manufacturer')->get();
 
         $types = VehicleType::all();
-        
-        return view('vehicles.index', ['vehicles' => $vehicles, 'models' => $models, 'types' => $types]);
+
+        $u_dolasku = Vehicle::where("status", "!=", "u_dolasku");
+
+        return view('vehicles.index', ['vehicles' => $vehicles, 'models' => $models, 'types' => $types, 'u_dolasku' => $u_dolasku]);
     }
 
     /**
@@ -131,8 +133,11 @@ class VehicleController extends Controller
         $vehicle = Vehicle::make($validated);
 
         Cache::forget('all_vehicles');
-        Cache::forget('latest-vehicles');
-        Cache::forget('discounted-vehicles');
+        //Reset new status on vehicles
+        $currentLatest = Vehicle::where('status', '=', "new");
+        foreach ($currentLatest as $vehicle) {
+            $vehicle->status = null;
+        }
 
         if (!app()->isProduction()) {
             $additionToPath = 'local/';
@@ -161,13 +166,19 @@ class VehicleController extends Controller
         $equipment = Equipment::all();
         $equipmentIDs = [];
         foreach ($equipment as $eq) {
-            if($request->has('equipment'. $eq->id)){
+            if ($request->has('equipment' . $eq->id)) {
                 $equipmentIDs[] = $eq->id;
             }
         }
-        
+
+        if($request->has('uDolasku')){
+            $vehicle->status = "u_dolasku";
+        }else{
+            $vehicle->status = null;
+        }
+
         $vehicle->save();
-        
+
         $vehicle->equipment()->sync($equipmentIDs);
 
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id])->with('status', 'Vozilo je uspjesno dodano.');
@@ -181,7 +192,7 @@ class VehicleController extends Controller
      */
     public function show($id)
     {
-        $vehicle = Cache::get($id, function() use($id){
+        $vehicle = Cache::get($id, function () use ($id) {
             $temp = Vehicle::with('equipment')->findOrFail($id);
             Cache::put($id, $temp, now()->addMinutes(30));
             return $temp;
@@ -209,6 +220,7 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
+        
         $this->authorize('vehicles.update');
         $vehicle = Vehicle::with('equipment')->findOrFail($id);
         $models = VehicleModel::with('manufacturer')->get();
@@ -229,14 +241,18 @@ class VehicleController extends Controller
 
         Cache::forget($id);
         Cache::forget('all_vehicles');
-        Cache::forget('latest-vehicles');
-        Cache::forget('discounted-vehicles');
-
+        //Remove new status from current latest vehicles
+        $currentLatest = Vehicle::where('status', '=', "new")->get();
+        //dd($currentLatest);
+        foreach ($currentLatest as $vehicle) {
+            $vehicle->status = null;
+        }
+        
         $thumbnail_path = $vehicle->thumbnail;
         $images = $vehicle->images()->get();
         $validated = $request->validated();
         $vehicle->fill($validated);
-
+        
         //Env must be detected so that the folder in s3 can be set accordingly so that they don't clash
         if (!app()->isProduction()) {
             $additionToPath = 'local/';
@@ -250,7 +266,7 @@ class VehicleController extends Controller
             $vehicle->thumbnail = $path;
         }
 
-
+        
         if ($request->hasFile('photos')) {
             //Deleting all the currently available images
             if ($images) {
@@ -260,7 +276,7 @@ class VehicleController extends Controller
                     Image::find($image->id)->delete();
                 }
             }
-
+            
             //Storing the new ones again
             foreach ($request->file('photos') as $photo) {
                 $path = Storage::disk('s3')->put($additionToPath . 'vehicles/' . 'vehicle' . $vehicle->id, $photo);
@@ -270,19 +286,25 @@ class VehicleController extends Controller
                 $image->save();
             }
         }
-
+        
         $equipment = Equipment::all();
         $equipmentIDs = [];
         foreach ($equipment as $eq) {
-            if($request->has('equipment'. $eq->id)){
+            if ($request->has('equipment' . $eq->id)) {
                 $equipmentIDs[] = $eq->id;
             }
         }
 
         $vehicle->equipment()->sync($equipmentIDs);
-
+        
+        if($request->has('uDolasku')){
+            $vehicle->status = "u_dolasku";
+        }else{
+            $vehicle->status = null;
+        }
+        
         $vehicle->save();
-
+        
         $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id]);
     }
@@ -297,13 +319,15 @@ class VehicleController extends Controller
     {
         Gate::authorize('vehicles.delete');
         $vehicle = Vehicle::findOrFail($id);
-
+        
         Storage::disk('s3')->delete($vehicle->thumbnail);
-
+        
         Cache::forget($id);
         Cache::forget('all_vehicles');
-        Cache::forget('latest-vehicles');
-        Cache::forget('discounted-vehicles');
+        $currentLatest = Vehicle::where('status', '=', "new")->get();
+        foreach ($currentLatest as $vehicle) {
+            $vehicle->status = null;
+        }
 
         $images = $vehicle->images();
 

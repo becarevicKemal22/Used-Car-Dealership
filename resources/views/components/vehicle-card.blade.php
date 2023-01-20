@@ -1,5 +1,5 @@
     <div {{ $attributes->merge(['class' => 'card border-0 h-100 vehicle-card']) }}>
-        <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
+        <img class="card-img-top" style="overflow:hidden;" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
         @if ($vehicle->discount_price > 0)
             <span class="discount"></span>
         @endif

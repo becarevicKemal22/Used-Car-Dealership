@@ -54,6 +54,11 @@
         </div>
     @endforeach
 
+    <input class="form-check-input" type="checkbox" value="1" name="uDolasku" id="flexCheckDefault">
+    <label class="form-check-label" for="flexCheckDefault">
+        U dolasku?
+    </label>
+
     <select id="manufacturer" name="manufacturer">
 
     </select> <br>
