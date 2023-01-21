@@ -1,5 +1,5 @@
     <div {{ $attributes->merge(['class' => 'card border-0 h-100 vehicle-card']) }}>
-        <img class="card-img-top" style="overflow:hidden;" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}"
+        <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}"
             alt="Slika vozila">
         @if ($vehicle->status == 'u_dolasku')
             <span class="ribbon uDolasku"></span>
@@ -58,6 +58,7 @@
     <style>
         .vehicle-card {
             width: 16rem;
+            overflow: hidden;
         }
 
         .ribbon {
