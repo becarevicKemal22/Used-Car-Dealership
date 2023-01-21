@@ -25,7 +25,7 @@
     <br>
     @if (count($discounted_vehicles))
         <div class="akcija-container mt-2 p-4 d-flex flex-column align-items-center">
-            <h2 style="font-weight: bold; color: white;">Akcijska ponuda</h4>
+            <h2 style="font-weight: bold; color: white;">Akcijska ponuda</h2>
                 <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
                     @foreach ($discounted_vehicles as $vehicle)
                         <ul class="carousel-piece">
@@ -55,6 +55,19 @@
             </div>
         </div>
     </div>
+    @if (count($uDolasku))
+        <div class="akcija-container mt-2 p-4 d-flex flex-column align-items-center">
+            <h2 style="font-weight: bold; color: white;">U dolasku</h2>
+                <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
+                    @foreach ($uDolasku as $vehicle)
+                        <ul class="carousel-piece">
+                            <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
+                        </ul>
+                    @endforeach
+                </div>
+
+        </div>
+    @endif
 
     <style>
         .slideshow-container {

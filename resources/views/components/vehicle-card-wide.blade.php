@@ -2,6 +2,13 @@
     <div class="row no-gutters">
         <div class="col-md-3 no-padding">
             <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
+            @if ($vehicle->status == 'u_dolasku')
+                <span class="ribbon uDolasku"></span>
+            @elseif ($vehicle->discount_price > 0)
+                <span class="ribbon discount"></span>
+            @elseif($latest != null and $latest->contains('id', $vehicle->id))
+                <span class="ribbon novo"></span>
+            @endif
         </div>
         <div class="col-md-8">
             <div class="card-body">

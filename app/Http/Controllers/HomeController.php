@@ -30,6 +30,8 @@ class HomeController extends Controller
 
         $discounted_vehicles = Vehicle::where('discount_price', '>', 0)->take(5)->get();
 
-        return view('home', ['vehicles' => $vehicles, 'latest' => $latest, 'discounted_vehicles' => $discounted_vehicles]);
+        $uDolasku = Vehicle::where('status', '=', 'u_dolasku')->take(3)->get();
+
+        return view('home', ['vehicles' => $vehicles, 'latest' => $latest, 'discounted_vehicles' => $discounted_vehicles, 'uDolasku' => $uDolasku]);
     }
 }

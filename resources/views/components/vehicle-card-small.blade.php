@@ -1,7 +1,11 @@
     <div {{ $attributes->merge(['class' => 'card border-0 h-100']) }} id="vehicle-card">
         <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
-        @if ($vehicle->discount_price > 0)
-            <span class="discount"></span>
+        @if ($vehicle->status == 'u_dolasku')
+            <span class="ribbon uDolasku"></span>
+        @elseif ($vehicle->discount_price > 0)
+            <span class="ribbon discount"></span>
+        @elseif($latest != null and $latest->contains('id', $vehicle->id))
+            <span class="ribbon novo"></span>
         @endif
         <div class="card-body">
             <a href="{{ route('vozila.show', ['vozila' => $vehicle->id]) }}"class="text-black">
@@ -55,7 +59,7 @@
             overflow: hidden;
         }
 
-        .discount {
+        .ribbon {
             position: absolute;
             top: 0;
             bottom: 0;
@@ -63,8 +67,21 @@
             right: 0;
             height: 100%;
             width: 100%;
-            background-image: url('{{ Storage::disk('s3')->url('assets/akcijaRibbon.webp') }}');
             background-size: contain;
             background-repeat: no-repeat;
+        }
+
+        .discount {
+
+            background-image: url('{{ Storage::disk('s3')->url('assets/akcijaRibbon.webp') }}');
+
+        }
+
+        .uDolasku {
+            background-image: url('{{ Storage::disk('s3')->url('assets/dolazakRibbon.webp') }}');
+        }
+
+        .novo {
+            background-image: url('{{ Storage::disk('s3')->url('assets/novoRibbon.webp') }}');
         }
     </style>

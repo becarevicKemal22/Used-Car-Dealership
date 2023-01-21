@@ -13,10 +13,12 @@ class VehicleCard extends Component
      */
 
     public $vehicle;
+    public $latest;
 
-    public function __construct($vehicle)
+    public function __construct($vehicle, $latest = null)
     {
         $this->vehicle = $vehicle;
+        $this->latest = $latest;
     }
 
     /**

@@ -105,7 +105,9 @@ class VehicleController extends Controller
 
         $u_dolasku = Vehicle::where("status", "!=", "u_dolasku");
 
-        return view('vehicles.index', ['vehicles' => $vehicles, 'models' => $models, 'types' => $types, 'u_dolasku' => $u_dolasku]);
+        $latest = Vehicle::whereNotIn('status', ['u_dolasku'])->orWhere('status', '=', null)->latest()->take(3)->get();
+
+        return view('vehicles.index', ['vehicles' => $vehicles, 'models' => $models, 'types' => $types, 'u_dolasku' => $u_dolasku, 'latest' => $latest]);
     }
 
     /**
