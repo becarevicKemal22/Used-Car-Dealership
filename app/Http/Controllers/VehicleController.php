@@ -154,17 +154,6 @@ class VehicleController extends Controller
             $vehicle->thumbnail = $path;
         }
 
-
-        if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $path = Storage::disk('s3')->put($additionToPath . 'vehicles/' .  'vehicle' . $vehicle->id, $photo);
-                $image = new Image();
-                $image->path = $path;
-                $image->vehicle_id = $vehicle->id;
-                $image->save();
-            }
-        }
-
         $equipment = Equipment::all();
         $equipmentIDs = [];
         foreach ($equipment as $eq) {
@@ -182,6 +171,16 @@ class VehicleController extends Controller
         $vehicle->save();
 
         $vehicle->equipment()->sync($equipmentIDs);
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = Storage::disk('s3')->put($additionToPath . 'vehicles/' .  'vehicle' . $vehicle->id, $photo);
+                $image = new Image();
+                $image->path = $path;
+                $image->vehicle_id = $vehicle->id;
+                $image->save();
+            }
+        }
 
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id])->with('status', 'Vozilo je uspjesno dodano.');
     }
