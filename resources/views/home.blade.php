@@ -26,13 +26,13 @@
     @if (count($discounted_vehicles))
         <div class="akcija-container mt-2 p-4 d-flex flex-column align-items-center">
             <h2 style="font-weight: bold; color: white;">Akcijska ponuda</h2>
-                <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
-                    @foreach ($discounted_vehicles as $vehicle)
-                        <ul class="carousel-piece">
-                            <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
-                        </ul>
-                    @endforeach
-                </div>
+            <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
+                @foreach ($discounted_vehicles as $vehicle)
+                    <ul class="carousel-piece">
+                        <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
+                    </ul>
+                @endforeach
+            </div>
 
         </div>
     @endif
@@ -55,16 +55,23 @@
             </div>
         </div>
     </div>
+    @if (count($logos))
+        <div class="mt-2 p-4 d-flex align-items-center justify-content-center flex-wrap gap-4">
+                @foreach ($logos as $idx => $logo)
+                    <a href="/vozila?manufacturer={{$idx}}"><img src="{{ $logo }}" alt="" style="max-width: 150px; max-height: 150px;"></a>
+                @endforeach
+        </div>
+    @endif
     @if (count($uDolasku))
         <div class="akcija-container mt-2 p-4 d-flex flex-column align-items-center">
             <h2 style="font-weight: bold; color: white;">U dolasku</h2>
-                <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
-                    @foreach ($uDolasku as $vehicle)
-                        <ul class="carousel-piece">
-                            <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
-                        </ul>
-                    @endforeach
-                </div>
+            <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
+                @foreach ($uDolasku as $vehicle)
+                    <ul class="carousel-piece">
+                        <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
+                    </ul>
+                @endforeach
+            </div>
 
         </div>
     @endif
