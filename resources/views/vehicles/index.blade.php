@@ -5,7 +5,10 @@
         <div class="row gx-5">
             <div class="col-lg-9 col-md-7">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h4>Nasa trenutna ponuda vozila</h4>
+                    <div class="left">
+                        <h4 style="display: inline-block; padding-right: 5px;">Naša trenutna ponuda vozila</h4>
+                        <h5 style="display: inline-block" class="bold-text">(Prikazano {{count($vehicles) }} rezultata za vašu pretragu)</h5>
+                    </div>
                     <div class="dropdown">
                         <button class="btn btn-secondary bg-primary text-white dropBtn" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="sortDropdown()">
