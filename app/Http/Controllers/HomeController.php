@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manufacturer;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -32,6 +34,15 @@ class HomeController extends Controller
 
         $uDolasku = Vehicle::where('status', '=', 'u_dolasku')->take(3)->get();
 
-        return view('home', ['vehicles' => $vehicles, 'latest' => $latest, 'discounted_vehicles' => $discounted_vehicles, 'uDolasku' => $uDolasku]);
+        //Get paths for image logos where they exist
+        $manufacturers = Manufacturer::all();
+        $manufacturer_logo_paths = [];
+        foreach ($manufacturers as $manufacturer){
+            if(Storage::disk('s3')->exists('assets/carLogos/'.strtolower($manufacturer->name).'.png')){
+                $manufacturer_logo_paths[$manufacturer->id] = Storage::disk('s3')->url('assets/carLogos/'.strtolower($manufacturer->name).'.png');
+            }
+        }
+
+        return view('home', ['vehicles' => $vehicles, 'latest' => $latest, 'discounted_vehicles' => $discounted_vehicles, 'uDolasku' => $uDolasku, 'logos' => $manufacturer_logo_paths]);
     }
 }
