@@ -56,7 +56,7 @@
         </div>
     </div>
     @if (count($logos))
-        <div class="mt-2 p-4 d-flex align-items-center justify-content-center flex-wrap gap-4">
+        <div class="mt-2 p-4 d-flex align-items-center justify-content-center flex-wrap gap-5">
                 @foreach ($logos as $idx => $logo)
                     <a href="/vozila?manufacturer={{$idx}}"><img src="{{ $logo }}" alt="" style="max-width: 150px; max-height: 150px;"></a>
                 @endforeach

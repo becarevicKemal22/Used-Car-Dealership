@@ -38,8 +38,9 @@ class HomeController extends Controller
         $manufacturers = Manufacturer::all();
         $manufacturer_logo_paths = [];
         foreach ($manufacturers as $manufacturer){
-            if(Storage::disk('s3')->exists('assets/carLogos/'.strtolower($manufacturer->name).'.png')){
-                $manufacturer_logo_paths[$manufacturer->id] = Storage::disk('s3')->url('assets/carLogos/'.strtolower($manufacturer->name).'.png');
+            $path = 'assets/carLogos/'.strtolower($manufacturer->name).'.webp';
+            if(Storage::disk('s3')->exists($path)){
+                $manufacturer_logo_paths[$manufacturer->id] = Storage::disk('s3')->url($path);
             }
         }
 
