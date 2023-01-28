@@ -40,9 +40,15 @@ class HomeController extends Controller
         foreach ($manufacturers as $manufacturer){
             $path = 'assets/carLogos/'.strtolower($manufacturer->name).'.webp';
             if(Storage::disk('s3')->exists($path)){
-                $manufacturer_logo_paths[$manufacturer->id] = Storage::disk('s3')->url($path);
+                $manufacturer_logo_paths[$manufacturer->id][] = Storage::disk('s3')->url($path);
+                $manufacturer_logo_paths[$manufacturer->id][] = $manufacturer->name;
             }
         }
+        // dd($manufacturer_logo_paths);
+        // foreach ($manufacturer_logo_paths as $idx => $logo){
+        //     dump($logo);
+        // }
+        // die;
 
         return view('home', ['vehicles' => $vehicles, 'latest' => $latest, 'discounted_vehicles' => $discounted_vehicles, 'uDolasku' => $uDolasku, 'logos' => $manufacturer_logo_paths]);
     }

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Euro Centar</title>
+    <title>Eurocentar</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -27,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand" href="/">
                     <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="90"
-                        class="d-inline-block align-top" alt="">
+                        class="d-inline-block align-top" alt="Eurocentar logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
