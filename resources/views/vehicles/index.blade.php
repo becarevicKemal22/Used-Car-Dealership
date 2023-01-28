@@ -44,7 +44,7 @@
                             <input type="search" id="pretraga" name="pretraga" class="form-control"
                                 placeholder="Pretraga vozila" />
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" aria-label="Dugme za pretragu">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -135,12 +135,12 @@
                         @foreach ($types as $type)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{ $type->id }}"
-                                    name={{ 'type' . $type->id }} id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                    name={{ 'type' . $type->id }} id="{{'flexCheckDefault'.$type->id}}">
+                                <label class="form-check-label" for="{{'flexCheckDefault'.$type->id}}">
                                     {{ $type->name }}
                                 </label>
                                 <img src="{{ Storage::disk('s3')->url('icons/' . strtolower($type->name)) . '.svg' }}"
-                                    alt="" class="icon">
+                                    alt="{{'Pretraga po tipu:'.$type->name}}" class="icon">
                             </div>
                         @endforeach
 

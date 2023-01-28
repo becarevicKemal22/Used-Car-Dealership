@@ -188,8 +188,8 @@
 
                         <!-- Content -->
                         <div class="d-flex gap-4 align-items-center justify-content-start">
-                            <a href="#" style="font-size: 2.5em" alt="Instagram"><i class="fa-brands fa-instagram" alt="Instagram"></i></a>
-                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em" alt="Facebook"><i
+                            <a href="#" style="font-size: 2.5em" alt="Instagram"><i class="fa-brands fa-instagram" name="Instagram"></i></a>
+                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em" name="Facebook"><i
                                     class="fa-brands fa-facebook"  alt="Facebook"></i></a>
                             <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="65" alt="Eurocentar logo">
                         </div>
