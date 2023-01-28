@@ -4,11 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Prodaja polovnih vozila. Nalazimo se na Ilidži u Sarajevu, Ismeta Alajbegovića Šerbe br. 1A. Otvoreni Pon-Sub 09:00 - 17:00">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Euro Centar</title>
+    <title>Eurocentar</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -27,7 +28,7 @@
             <div class="container">
                 <a class="navbar-brand" href="/">
                     <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="90"
-                        class="d-inline-block align-top" alt="">
+                        class="d-inline-block align-top" alt="Eurocentar logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -187,10 +188,10 @@
 
                         <!-- Content -->
                         <div class="d-flex gap-4 align-items-center justify-content-start">
-                            <a href="" style="font-size: 2.5em"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em"><i
-                                    class="fa-brands fa-facebook"></i></a>
-                            <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="65">
+                            <a href="#" style="font-size: 2.5em" alt="Instagram"><i class="fa-brands fa-instagram" name="Instagram"></i></a>
+                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em" name="Facebook"><i
+                                    class="fa-brands fa-facebook"  alt="Facebook"></i></a>
+                            <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="65" alt="Eurocentar logo">
                         </div>
 
                     </div>

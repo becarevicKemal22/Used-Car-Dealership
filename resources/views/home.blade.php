@@ -4,17 +4,17 @@
     <div class="slideshow-container mb-4">
 
         <div class="mySlides">
-            <img src="https://wallpapercave.com/wp/wp2797466.jpg" style="width:100%">
+            <img src="https://wallpapercave.com/wp/wp2797466.jpg" style="width:100%" alt="slideshow slika">
         </div>
 
         <div class="mySlides">
             <img src="https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700222915.jpg"
-                style="width:100%">
+                style="width:100%" alt="slideshow slika">
         </div>
 
         <div class="mySlides">
             <img src="https://www.supercars.net/blog/wp-content/uploads/2020/09/wallpaperflare.com_wallpaper-1-1.jpg"
-                style="width:100%">
+                style="width:100%" alt="slideshow slika">
         </div>
         <div style="text-align:center" class="dot-container">
             <span class="dot" onclick="currentSlide(0)"></span>
@@ -29,7 +29,9 @@
             <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
                 @foreach ($discounted_vehicles as $vehicle)
                     <ul class="carousel-piece">
-                        <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
+                        <li>
+                            <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
+                        </li>
                     </ul>
                 @endforeach
             </div>
@@ -51,24 +53,28 @@
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2052.4905700785116!2d18.3168698618783!3d43.84299663868699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758ca8c9a8e0a5b%3A0x8d64a55011bf4213!2sEUROCENTAR%20D.O.O.!5e0!3m2!1sen!2sba!4v1673920043317!5m2!1sen!2sba"
                         width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        referrerpolicy="no-referrer-when-downgrade" title="Google Maps lokacija"></iframe>
             </div>
         </div>
     </div>
     @if (count($logos))
         <div class="mt-2 p-4 d-flex align-items-center justify-content-center flex-wrap gap-5">
-                @foreach ($logos as $idx => $logo)
-                    <a href="/vozila?manufacturer={{$idx}}"><img src="{{ $logo }}" alt="" style="max-width: 150px; max-height: 150px;"></a>
-                @endforeach
+            @foreach ($logos as $idx => $logo)
+                <a href="/vozila?manufacturer={{ $idx }}"><img src="{{ $logo[0] }}"
+                        alt="{{ 'Pretraga ' . $logo[1] }}" style="max-width: 150px; max-height: 150px;"></a>
+            @endforeach
         </div>
     @endif
+
     @if (count($uDolasku))
         <div class="akcija-container mt-2 p-4 d-flex flex-column align-items-center">
             <h2 style="font-weight: bold; color: white;">U dolasku</h2>
             <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
                 @foreach ($uDolasku as $vehicle)
                     <ul class="carousel-piece">
-                        <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
+                        <li>
+                            <x-vehicle-card-small :vehicle="$vehicle"></x-vehicle-card-small>
+                        </li>
                     </ul>
                 @endforeach
             </div>

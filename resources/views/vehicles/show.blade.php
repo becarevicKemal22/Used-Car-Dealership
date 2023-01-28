@@ -103,7 +103,7 @@
                     <h3 class="text-bold text-center">Imate pitanje u vezi auta?</h3>
                     <div class="d-flex justify-content-center gap-4 mt-1">
                         <a href="tel:+38762800800" style="font-size: 2.4em;"><i class="fa-solid fa-phone"></i></a>
-                        <a href="" style="font-size: 2.5em"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" style="font-size: 2.5em"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em"><i
                                 class="fa-brands fa-facebook"></i></a>
                     </div>
