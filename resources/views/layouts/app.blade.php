@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Prodaja polovnih vozila. Nalazimo se na Ilidži u Sarajevu, Ismeta Alajbegovića Šerbe br. 1A. Otvoreni Pon-Sub 09:00 - 17:00">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -187,10 +188,10 @@
 
                         <!-- Content -->
                         <div class="d-flex gap-4 align-items-center justify-content-start">
-                            <a href="" style="font-size: 2.5em"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em"><i
-                                    class="fa-brands fa-facebook"></i></a>
-                            <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="65">
+                            <a href="#" style="font-size: 2.5em" alt="Instagram"><i class="fa-brands fa-instagram" alt="Instagram"></i></a>
+                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em" alt="Facebook"><i
+                                    class="fa-brands fa-facebook"  alt="Facebook"></i></a>
+                            <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="65" alt="Eurocentar logo">
                         </div>
 
                     </div>
