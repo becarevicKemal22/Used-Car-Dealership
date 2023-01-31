@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVehicle;
+use App\Http\Requests\UpdateVehicle;
 use App\Models\Equipment;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use App\Models\VehicleType;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;

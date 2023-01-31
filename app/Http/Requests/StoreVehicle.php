@@ -24,23 +24,31 @@ class StoreVehicle extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' =>'required|max:255',
-            'price' => 'required',
-            'discount_price' => '',
-            'production_year' => 'required|numeric',
-            'kilometers' => 'required|numeric',
-            'engine_type' =>'required|string',
-            'chassis_type' => 'required|string',
-            'gearbox' => 'required|string',
-            'color' => 'required|string',
-            'door_number' => 'nullable',
-            'engine_volume' => 'required|numeric',
-            'engine_strength' => 'required|numeric',
-            'drive' => 'nullable|string',
-            'opis' => 'nullable|string',
-            'vehicle_model_id' =>'nullable|integer',
-            'thumbnail' => 'required|image',
+        $rules = [
+        'name' =>'required|max:255',
+        'price' => 'required',
+        'discount_price' => '',
+        'production_year' => 'required|numeric',
+        'kilometers' => 'required|numeric',
+        'engine_type' =>'required|string',
+        'chassis_type' => 'required|string',
+        'gearbox' => 'required|string',
+        'color' => 'required|string',
+        'door_number' => 'nullable',
+        'engine_volume' => 'required|numeric',
+        'engine_strength' => 'required|numeric',
+        'drive' => 'nullable|string',
+        'opis' => 'nullable|string',
+        'vehicle_model_id' =>'nullable|integer',
+        'thumbnail' => 'required|image',
         ];
+        if($this->method() === 'POST'){
+            $rules['thumbnail'] = 'required|image';
+        }
+        else if($this->method() === 'PUT'){
+            $rules['thumbnail'] = 'image';
+        } 
+        return $rules;
+            
     }
 }
