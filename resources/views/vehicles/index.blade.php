@@ -217,7 +217,9 @@
             modelDropdown.appendChild(option);
         }
 
-        let models = @json($models->toArray());
+        let models = @json($models);
+        models = Object.values(models);
+        console.log(models);
         let manufacturers = [];
         let ids = [];
         models.forEach(element => {

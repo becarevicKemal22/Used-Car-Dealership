@@ -99,7 +99,7 @@ class VehicleController extends Controller
         //     return $temp;
         // });
 
-        $models = VehicleModel::with('manufacturer')->get();
+        $models = VehicleModel::with('manufacturer')->get()->sortBy('name')->sortBy('manufacturer.name')->values()->all();
 
         $types = VehicleType::all();
 
