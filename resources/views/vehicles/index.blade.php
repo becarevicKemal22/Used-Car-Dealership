@@ -52,7 +52,7 @@
 
                 <div class="d-flex justify-content-center gap-4 flex-wrap mb-4 align-items-stretch">
                     @foreach ($vehicles as $vehicle)
-                        <x-vehicle-card :$vehicle :$latest></x-vehicle-card>
+                        <x-vehicle-card :$vehicle :$latest class="card-index"></x-vehicle-card>
                     @endforeach
                 </div>
             </div>
