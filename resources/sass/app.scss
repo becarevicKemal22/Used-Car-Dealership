@@ -178,3 +178,13 @@ a{
     background-color: $primary;
     border-radius: 5px;
   }
+
+  .card-index{
+    box-shadow: 0em 0em 0.8em 0em rgba(0, 0, 0, 0.2);
+    transition: box-shadow 150ms, transform 150ms;
+  }
+  
+  .card-index:hover{
+    box-shadow: 0em 0em 1.4em 0em rgba(0, 0, 0, 0.35);
+    transform: scale(1.01);
+  }
