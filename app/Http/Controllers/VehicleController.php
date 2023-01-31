@@ -28,6 +28,7 @@ class VehicleController extends Controller
 
         //Getting the manufacturer names joined onto the vehicles collection so that sorting is available.
         $modelsTable = DB::table('vehicle_models')->leftJoin('manufacturers', 'manufacturer_id', '=', 'manufacturers.id')->select('vehicle_models.name as vehicle_model_name', 'vehicle_models.id as id_of_vehicle_model', 'vehicle_models.vehicle_type_id as vehicle_type_id', 'manufacturers.name as manufacturer_name', 'manufacturers.id as id_of_manufacturer');
+        
         $query->joinSub($modelsTable, 'modelsTable', function ($join) {
             $join->on('modelsTable.id_of_vehicle_model', '=', 'vehicle_model_id')->selectRaw('`modelsTable`.`manufacturer_name` as manufacturer_name');
         });
@@ -126,7 +127,7 @@ class VehicleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\StoreVehicle  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreVehicle $request)
@@ -228,7 +229,7 @@ class VehicleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\StoreVehicle  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -249,6 +250,10 @@ class VehicleController extends Controller
         $images = $vehicle->images()->get();
         $validated = $request->validated();
         $vehicle->fill($validated);
+
+        if($vehicle->thumbnail == null or $vehicle->thumbnail == '') {
+            return redirect()->back()->withErrors(['thumbnail' => 'Trenutno nije postavljen thumbnail za auto. Izaberite sliku za thumbnail i pokusajte ponovo.']);
+        }
         
         //Env must be detected so that the folder in s3 can be set accordingly so that they don't clash
         if (!app()->isProduction()) {
