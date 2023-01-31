@@ -199,11 +199,7 @@ class VehicleController extends Controller
             return $temp;
         });
 
-        $latest = Cache::get('latest-vehicles', function () {
-            $temp = Vehicle::latest()->take(3)->get();
-            Cache::put('latest-vehicles', $temp, now()->addMinutes(30));
-            return $temp;
-        });
+        $latest = Vehicle::where('id', '!=', $vehicle->id)->latest()->take(3)->get();
 
         $thumbnail = Storage::disk('s3')->url($vehicle->thumbnail);
         $imagePaths = $vehicle->images()->get()->pluck('path');
