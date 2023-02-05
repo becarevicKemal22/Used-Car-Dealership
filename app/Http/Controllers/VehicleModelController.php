@@ -6,7 +6,6 @@ use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use App\Models\VehicleModel;
 use App\Models\VehicleType;
-use Illuminate\Support\Facades\Gate;
 
 class VehicleModelController extends Controller
 {
