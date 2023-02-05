@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVehicle;
-use App\Http\Requests\UpdateVehicle;
 use App\Models\Equipment;
 use App\Models\Image;
 use Illuminate\Http\Request;
