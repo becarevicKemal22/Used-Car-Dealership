@@ -105,7 +105,7 @@ class VehicleController extends Controller
 
         $u_dolasku = Vehicle::where("status", "!=", "u_dolasku");
 
-        $latest = Vehicle::whereNotIn('status', ['u_dolasku'])->orWhere('status', '=', null)->latest()->take(3)->get();
+        $latest = Vehicle::latestVehicles()->take(3)->get();
 
         return view('vehicles.index', ['vehicles' => $vehicles, 'models' => $models, 'types' => $types, 'u_dolasku' => $u_dolasku, 'latest' => $latest]);
     }
@@ -135,6 +135,7 @@ class VehicleController extends Controller
         $vehicle = Vehicle::make($validated);
 
         Cache::forget('all_vehicles');
+
         //Reset new status on vehicles
         $currentLatest = Vehicle::where('status', '=', "new");
         foreach ($currentLatest as $vehicle) {
@@ -240,7 +241,6 @@ class VehicleController extends Controller
         Cache::forget('all_vehicles');
         //Remove new status from current latest vehicles
         $currentLatest = Vehicle::where('status', '=', "new")->get();
-        //dd($currentLatest);
         foreach ($currentLatest as $vehicle) {
             $vehicle->status = null;
         }
