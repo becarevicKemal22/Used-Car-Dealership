@@ -23,7 +23,7 @@ public function store(Request $request){
             'manufacturer_id' => 'required|integer',
             'vehicle_type_id' => 'required|integer',
         ]);
-        $model = VehicleModel::create($validated);
+        VehicleModel::create($validated);
         return redirect()->back()->with('status', 'Model uspjesno dodan.');
     }
 }

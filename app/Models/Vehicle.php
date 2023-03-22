@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +22,10 @@ class Vehicle extends Model
 
     public function equipment(){
         return $this->belongsToMany(Equipment::class);
+    }
+
+    public function scopeLatestVehicles(Builder $query){
+        $query->whereNotIn('status', ['u_dolasku'])->orWhere('status', '=', null)->latest();
+        return $query;
     }
 }
