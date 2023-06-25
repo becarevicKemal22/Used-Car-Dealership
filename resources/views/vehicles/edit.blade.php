@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('vozila.update', ['vozila' => $vehicle->id]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('vehicles.update', ['vehicle' => $vehicle->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         @include('vehicles._formEdit')
         <br>
-        <button type="submit">Spremi</button>
+        <button type="submit">Submit</button>
     </form>
 @endsection

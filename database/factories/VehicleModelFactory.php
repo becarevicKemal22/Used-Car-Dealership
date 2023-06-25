@@ -25,6 +25,7 @@ class VehicleModelFactory extends Factory
         return $this->state(function(array $attributes){
             return [
                 'name' => '308',
+                'vehicle_type_id' => 2,
             ];
         });
     }
@@ -33,6 +34,7 @@ class VehicleModelFactory extends Factory
         return $this->state(function(array $attributes){
             return [
                 'name' => '4008',
+                'vehicle_type_id' => 3,
             ];
         });
     }
@@ -41,6 +43,7 @@ class VehicleModelFactory extends Factory
         return $this->state(function(array $attributes){
             return [
                 'name' => 'Clio',
+                'vehicle_type_id' => 2,
             ];
         });
     }
@@ -49,6 +52,7 @@ class VehicleModelFactory extends Factory
         return $this->state(function(array $attributes){
             return [
                 'name' => 'S 320',
+                'vehicle_type_id' => 5,
             ];
         });
     }

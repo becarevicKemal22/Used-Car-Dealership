@@ -1,6 +1,6 @@
     <div {{ $attributes->merge(['class' => 'card border-0 h-100']) }} id="vehicle-card">
         @if($vehicle->thumbnail)
-            <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
+            <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Vehicle picture">
         @else
             <img class="card-img-top" alt="Placeholder" src="https://placehold.co/600x600">
         @endif
@@ -12,7 +12,7 @@
             <span class="ribbon novo"></span>
         @endif
         <div class="card-body">
-            <a href="{{ route('vozila.show', ['vozila' => $vehicle->id]) }}"class="text-black">
+            <a href="{{ route('vehicles.show', ['vehicle' => $vehicle->id]) }}"class="text-black">
                 <h5 class="card-title">{{ $vehicle->name }}</h5>
             </a>
             <div class="container p-0">
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-6">
                         <h6><i
-                                class="fa-solid fa-horse-head mt-2 text-icon-small"></i>{{ $vehicle->engine_strength . ' KS' }}
+                                class="fa-solid fa-horse-head mt-2 text-icon-small"></i>{{ $vehicle->engine_strength . ' HP' }}
                         </h6>
                     </div>
                     <div class="col-6">
@@ -36,22 +36,22 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('vozila.show', ['vozila' => $vehicle->id]) }}" class="stretched-link"></a>
+            <a href="{{ route('vehicles.show', ['vehicle' => $vehicle->id]) }}" class="stretched-link"></a>
         </div>
         <div class="card-footer text-white bg-primary pb-0">
             <div class="d-flex align-items-center justify-content-between">
                 <h6 style="margin-top: 2px;"> <i class="fa-solid fa-gauge-simple"></i>
-                    {{ number_format($vehicle->kilometers, 0) }}
+                    {{ number_format($vehicle->kilometers, 0). 'km' }}
                 </h6>
                 @if ($vehicle->discount_price != null && $vehicle->discount_price > 0)
                     <div class="d-flex flex-column align-items-end gap-0">
                         <strike>
-                            <h6 style="margin-bottom: 0;">{{ number_format($vehicle->price, 0) . ' KM' }}</h6>
+                            <h6 style="margin-bottom: 0;">{{ number_format($vehicle->price, 0) . ' €' }}</h6>
                         </strike>
-                        <h5>{{ number_format($vehicle->discount_price, 0) . ' KM' }}</h5>
+                        <h5>{{ number_format($vehicle->discount_price, 0) . ' €' }}</h5>
                     </div>
                 @else
-                    <h5>{{ number_format($vehicle->price, 0) . ' KM' }}</h5>
+                    <h5>{{ number_format($vehicle->price, 0) . ' €' }}</h5>
                 @endif
             </div>
         </div>

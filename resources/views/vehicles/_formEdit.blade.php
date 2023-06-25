@@ -1,48 +1,48 @@
 <div style="margin-left: 20px">
-    <label for="name">Ime vozila: </label>
+    <label for="name">Vehicle name: </label>
     <input type="text" name="name" id="name" value="{{ $vehicle->name ?? '' }}"> <br>
 
-    <label for="price">Cijena: </label>
+    <label for="price">Price: </label>
     <input type="text" name="price" id="price" value="{{ $vehicle->price ?? '' }}"> <br>
 
-    <label for="discount_price">Akcijska cijena: </label>
+    <label for="discount_price">Sale price: </label>
     <input type="text" name="discount_price" id="discount_price" value="{{ $vehicle->discount_price ?? '' }}"> <br>
 
-    <label for="production_year">Godina proizvodnje: </label>
+    <label for="production_year">Year of manufacturing: </label>
     <input type="number" name="production_year" id="production_year" value="{{ $vehicle->production_year ?? '' }}">
     <br>
 
-    <label for="kilometers">Kilometri: </label>
+    <label for="kilometers">Kilometres: </label>
     <input type="number" name="kilometers" id="kilometers" value="{{ $vehicle->kilometers ?? '' }}"> <br>
 
-    <label for="engine_type">Tip motora / gorivo: </label>
+    <label for="engine_type">Engine / fuel type: </label>
     <input type="text" name="engine_type" id="engine_type" value="{{ $vehicle->engine_type ?? '' }}"> <br>
 
-    <label for="chassis_type">Vrsta karoserije: </label>
+    <label for="chassis_type">Chassis type: </label>
     <input type="text" name="chassis_type" id="chassis_type" value="{{ $vehicle->chassis_type ?? '' }}"> <br>
 
-    <label for="gearbox">Transmisija: </label>
+    <label for="gearbox">Gearbox: </label>
     <input type="text" name="gearbox" id="gearbox" value="{{ $vehicle->gearbox ?? '' }}"> <br>
 
-    <label for="color">Boja: </label>
+    <label for="color">Color: </label>
     <input type="text" name="color" id="color" value="{{ $vehicle->color ?? '' }}"> <br>
 
-    <label for="door_number">Broj vrata: </label>
+    <label for="door_number">Door number: </label>
     <input type="text" name="door_number" id="door_number" value="{{ $vehicle->door_number ?? '' }}"> <br>
 
-    <label for="engine_volume">Kubikaza: </label>
+    <label for="engine_volume">Engine volume: </label>
     <input type="text" name="engine_volume" id="engine_volume" value="{{ $vehicle->engine_volume ?? '' }}"> <br>
 
-    <label for="engine_strength">Konjskih snaga: </label>
+    <label for="engine_strength">Horse power: </label>
     <input type="number" name="engine_strength" id="engine_strength" value="{{ $vehicle->engine_strength ?? '' }}">
     <br>
 
-    <label for="drive">Pogon: </label>
+    <label for="drive">Drive: </label>
     <input type="text" name="drive" id="drive" value="{{ $vehicle->drive ?? '' }}"> <br>
 
     {{-- <label for="status_id">Status: </label>
 <input type="text" name="status_id" id="status_id"> <br> --}}
-    <label for="opis">Opis: </label> <br>
+    <label for="opis">Description: </label> <br>
     <textarea name="opis" id="opis" cols="30" rows="10">{{ $vehicle->opis ?? '' }}</textarea> <br>
 
     @foreach ($equipment as $item)
@@ -57,12 +57,12 @@
     <input class="form-check-input" type="checkbox" value="1" name="uDolasku"
         id="flexCheckDefault" <?php echo ($vehicle->status == "u_dolasku") ? 'checked' : ''; ?>>
     <label class="form-check-label" for="flexCheckDefault">
-        U dolasku?
+        In arrival?
     </label> <br>
 
     @php
         use Illuminate\Support\Facades\DB;
-        
+
         if (
             DB::table('vehicle_models')
                 ->where('id', $vehicle->vehicle_model_id)

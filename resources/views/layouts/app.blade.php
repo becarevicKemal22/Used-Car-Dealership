@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Prodaja polovnih vozila. Nalazimo se na Ilidži u Sarajevu, Ismeta Alajbegovića Šerbe br. 1A. Otvoreni Pon-Sub 09:00 - 17:00">
+    <meta name="description" content="Sale of used cars. We are located in Sarajevo and we're open Monday-Saturday from 9AM to 5PM.">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Eurocentar</title>
+    <title>Used car dealership</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -45,16 +45,16 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto" style="font-size: 1.25rem; font-weight: bold;">
                         <li class="nav-item px-2">
-                            <a class="nav-link {{ Request::url() == url('/')  ? 'current-page' : '' }}" href="/"> Početna </a>
+                            <a class="nav-link {{ Request::url() == url('/')  ? 'current-page' : '' }}" href="/"> Home </a>
                         </li>
                         <li class="nav-item px-2">
-                            <a class="nav-link {{ Request::url() == url('/vozila')  ? 'current-page' : '' }}" href="/vozila"> Ponuda vozila </a>
+                            <a class="nav-link {{ Request::url() == url('/vehicles')  ? 'current-page' : '' }}" href="/vehicles"> Cars for sale </a>
                         </li>
                         <li class="nav-item px-2">
-                            <a class="nav-link {{ Request::url() == url('/about')  ? 'current-page' : '' }}" href="/about"> O nama </a>
+                            <a class="nav-link {{ Request::url() == url('/about')  ? 'current-page' : '' }}" href="/about"> About us </a>
                         </li>
-                        <li class="nav-item px-2 {{ Request::url() == url('/kontakt')  ? 'current-page' : '' }}">
-                            <a class="nav-link" href="/kontakt"> Kontakt </a>
+                        <li class="nav-item px-2 {{ Request::url() == url('/contact')  ? 'current-page' : '' }}">
+                            <a class="nav-link" href="/kontakt"> Contact us </a>
                         </li>
                         <!-- Authentication Links -->
 
@@ -111,35 +111,32 @@
                     <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
-                        <h5 class="text-uppercase mb-3">Navigacija</h5>
+                        <h5 class="text-uppercase mb-3">Navigation</h5>
 
                         <ul class="list-unstyled d-flex flex-column gap-2">
                             <li>
-                                <a href="/">Početna</a>
+                                <a href="/">Home</a>
                             </li>
                             <li>
-                                <a href=" {{ route('vozila.index') }} ">Ponuda vozila</a>
+                                <a href=" {{ route('vehicles.index') }} ">Cars for sale</a>
                             </li>
                             <li>
-                                <a href="/usluge">Usluge</a>
-                            </li>
-                            <li>
-                                <a href="/about">O nama</a>
+                                <a href="/about">About us</a>
                             </li>
 
                             {{-- Admin options --}}
                             @auth
                                 <li>
-                                    <a href="{{ route('vozila.create') }}">Dodaj vozilo</a>
+                                    <a href="{{ route('vehicles.create') }}">Add vehicle</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('manufacturers.create') }}">Dodaj marku</a>
+                                    <a href="{{ route('manufacturers.create') }}">Add manufacturer</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('vehicleModels.create') }}">Dodaj model auta</a>
+                                    <a href="{{ route('vehicleModels.create') }}">Add model</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('vehicleTypes.create') }}">Dodaj tip auta</a>
+                                    <a href="{{ route('vehicleTypes.create') }}">Add vehicle type</a>
                                 </li>
                             @endauth
                         </ul>
@@ -149,14 +146,14 @@
                     <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
-                        <h5 class="text-uppercase mb-3">Kontakt</h5>
+                        <h5 class="text-uppercase mb-3">Contact</h5>
 
                         <ul class="list-unstyled d-flex flex-column gap-3">
                             <li class="mb-1">
-                                <a href="tel:+38762800800" style="font-weight: bold;">+387 62/800-800</a>
+                                <a href="tel:+387602202205" style="font-weight: bold;">+387 22/022-005</a>
                             </li>
                             <li>
-                                <a href="https://eurocentar.olx.ba/" style="font-weight: bold;">eurocentar.olx.ba</a>
+                                <a href="https://olx.ba" style="font-weight: bold;">Our site on OLX</a>
                             </li>
                         </ul>
 
@@ -165,30 +162,29 @@
                     <div class="col-lg-2 mb-lg-0 mb-3">
 
                         <!-- Links -->
-                        <h5 class="text-uppercase">Radno vrijeme</h5>
+                        <h5 class="text-uppercase">Working hours</h5>
 
                         <ul class="list-unstyled">
                             <li>
-                                <p class="mb-1">Pon-Sub 09:00 - 17:00</p>
+                                <p class="mb-1">Mon-Sat 09:00 - 17:00</p>
                             </li>
                             <li>
-                                <p class="mb-1">Sarajevo, Ilidža</p>
+                                <p class="mb-1">Sarajevo, Koševsko brdo</p>
                             </li>
                             <li>
-                                <p class="mb-1">Ismeta Alajbegovića Šerbe br. 1 A</p>
+                                <p class="mb-1">Some random address no. 22</p>
                             </li>
                         </ul>
 
                     </div>
                     <!-- Grid column -->
                     <div class="col-lg-2 mt-lg-0 mt-3">
-
                         <!-- Content -->
                         <div class="d-flex gap-4 align-items-center justify-content-start">
-                            <a href="#" style="font-size: 2.5em" alt="Instagram"><i class="fa-brands fa-instagram" name="Instagram"></i></a>
-                            <a href="https://www.facebook.com/eurocentar.sarajevo/"style="font-size: 2.5em" name="Facebook"><i
+                            <a href="https://instagram.com" style="font-size: 2.5em" alt="Instagram"><i class="fa-brands fa-instagram" name="Instagram"></i></a>
+                            <a href="https://facebook.com"style="font-size: 2.5em" name="Facebook"><i
                                     class="fa-brands fa-facebook"  alt="Facebook"></i></a>
-                            <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="65" alt="Eurocentar logo">
+                            <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="65" alt="Company logo">
                         </div>
 
                     </div>

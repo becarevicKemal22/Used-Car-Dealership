@@ -26,7 +26,7 @@
     <br>
     @if (count($discounted_vehicles))
         <div class="akcija-container mt-2 p-4 d-flex flex-column align-items-center">
-            <h2 style="font-weight: bold; color: white;">Akcijska ponuda</h2>
+            <h2 style="font-weight: bold; color: white;">Vehicles on sale</h2>
             <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
                 @foreach ($discounted_vehicles as $vehicle)
                     <ul class="carousel-piece">
@@ -42,7 +42,7 @@
     <div class="container mt-4">
         <div class="row p-4 gx-5 flex-row-reverse">
             <div class="col-lg-6 mb-4">
-                <h2 style="font-weight: bold; color:#8a1820;">Najnovije u ponudi</h2>
+                <h2 style="font-weight: bold; color:#8a1820;">Latest offers</h2>
                 <div class="d-flex flex-column justify-content-between gap-3 align-items-center">
                     @foreach ($latest as $vehicle)
                         <x-vehicle-card-wide :vehicle="$vehicle"></x-vehicle-card-wide>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="col-lg-6 mb-4">
-                <h2 style="font-weight: bold; color:#8a1820;">Naša lokacija</h2>
+                <h2 style="font-weight: bold; color:#8a1820;">Our location</h2>
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92005.52034758161!2d18.300591448450884!3d43.893693696123165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758cbb1ed719bd1%3A0x562ecda6de87b33e!2sSarajevo!5e0!3m2!1sen!2sba!4v1687700731340!5m2!1sen!2sba"
                     width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
@@ -61,7 +61,7 @@
     @if (count($logos))
         <div class="mt-2 p-4 d-flex align-items-center justify-content-center flex-wrap gap-5">
             @foreach ($logos as $idx => $logo)
-                <a href="/vozila?manufacturer={{ $idx }}"><img src="{{ $logo[0] }}"
+                <a href="/vehicles?manufacturer={{ $idx }}"><img src="{{ $logo[0] }}"
                                                                alt="{{ 'Pretraga ' . $logo[1] }}"
                                                                style="max-width: 150px; max-height: 150px;"></a>
             @endforeach
@@ -70,7 +70,7 @@
 
     @if (count($uDolasku))
         <div class="akcija-container mt-2 p-4 d-flex flex-column align-items-center">
-            <h2 style="font-weight: bold; color: white;">U dolasku</h2>
+            <h2 style="font-weight: bold; color: white;">In arrival</h2>
             <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
                 @foreach ($uDolasku as $vehicle)
                     <ul class="carousel-piece">

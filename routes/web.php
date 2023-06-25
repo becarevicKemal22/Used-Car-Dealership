@@ -30,7 +30,7 @@ if (App::environment('production')) {
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::resource('vozila', VehicleController::class);
+Route::resource('vehicles', VehicleController::class);
 
 Route::get('/nova_marka', [ManufacturerController::class, 'create'])->name('manufacturers.create');
 Route::post('/nova_marka', [ManufacturerController::class, 'store'])->name('manufacturers.store');
@@ -44,8 +44,7 @@ Route::post('/novi_tip', [VehicleTypeController::class, 'store'])->name('vehicle
 Route::get('/nova_oprema', [EquipmentController::class, 'create'])->name('equipment.create');
 Route::post('/nova_oprema', [EquipmentController::class, 'store'])->name('equipment.store');
 
-Route::view('/kontakt', 'kontakt.blade.php');
-Route::view('/usluge', 'usluge.blade.php');
+Route::view('/contact', 'contact.blade.php');
 Route::view('/about', 'about.blade.php');
 
 Auth::routes(['register' => false, 'reset' => false]);

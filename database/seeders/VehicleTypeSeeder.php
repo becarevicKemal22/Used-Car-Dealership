@@ -13,7 +13,7 @@ class VehicleTypeSeeder extends Seeder
      *
      * @return void
      */
-    
+
     public function run()
     {
         $types = [
@@ -21,10 +21,9 @@ class VehicleTypeSeeder extends Seeder
             'Hatchback',
             'SUV',
             'Coupe',
-            'Limuzina',
+            'Limousine',
             'Minivan',
-            'Kombi',
-            'Test Type',
+            'Van',
         ];
 
         foreach ($types as $type){

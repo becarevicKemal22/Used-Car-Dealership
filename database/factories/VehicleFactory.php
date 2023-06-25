@@ -24,18 +24,18 @@ class VehicleFactory extends Factory
     public function peugeot308(){
         return $this->state(function(array $attributes){
             return [
-                'name' => 'PEUGEOT 308 SW 1.6 HDI , 2014 GODINA, NAVIGACIJA',
+                'name' => 'PEUGEOT 308 SW 1.6 HDI',
                 'price' => '14999',
                 'production_year' => '2014',
                 'kilometers' => 205000,
-                'engine_type' => 'Dizel',
-                'chassis_type' => 'Karavan',
-                'gearbox' => 'Manuelni',
-                'color' => 'Plava',
+                'engine_type' => 'Diesel',
+                'chassis_type' => 'Hatchback',
+                'gearbox' => 'Manual',
+                'color' => 'Blue',
                 'door_number' => '4/5',
                 'engine_volume' => '1.6',
                 'engine_strength' => 120,
-                'drive' => 'Prednji',
+                'drive' => 'Front',
                 'opis' => 'Ovo je opis ovog vozila',
                 "thumbnail" => "",
             ];
@@ -44,14 +44,14 @@ class VehicleFactory extends Factory
     public function peugeot4008(){
         return $this->state(function(array $attributes){
             return [
-                'name' => 'PEUGEOT 4008 2.2 HDI 4X4 ,2008 GOD, 7 SJEDIŠTA',
+                'name' => 'PEUGEOT 4008 2.2 HDI 4X4',
                 'price' => '12500',
                 'production_year' => '2008',
                 'kilometers' => 227000,
-                'engine_type' => 'Dizel',
-                'chassis_type' => 'Terenac',
-                'gearbox' => 'Manuelni',
-                'color' => 'Crna',
+                'engine_type' => 'Diesel',
+                'chassis_type' => 'SUV',
+                'gearbox' => 'Manual',
+                'color' => 'Black',
                 'door_number' => '5',
                 'engine_volume' => '2.2',
                 'engine_strength' => 156,
@@ -79,14 +79,14 @@ class VehicleFactory extends Factory
     public function mercedesS320(){
         return $this->state(function(array $attributes){
             return [
-                'name' => 'MERCEDES-BENZ S320 CDI, 2008 GODINA, XENONI, ŠIBER',
+                'name' => 'MERCEDES-BENZ S320 CDI',
                 'price' => '20999',
                 'production_year' => '2008',
                 'kilometers' => 334000,
-                'engine_type' => 'Dizel',
-                'chassis_type' => 'Limuzina',
-                'gearbox' => 'Automatik',
-                'color' => 'Siva',
+                'engine_type' => 'Diesel',
+                'chassis_type' => 'Limousine',
+                'gearbox' => 'Automatic',
+                'color' => 'Gray',
                 'engine_volume' => '3.0',
                 'engine_strength' => 235,
                 'opis' => 'MERCEDES-BENZ S320 CDI
@@ -108,12 +108,12 @@ class VehicleFactory extends Factory
     public function renaultClio(){
         return $this->state(function(array $attributes){
             return [
-                'name' => 'RENAULT CLIO 1.5 DCI SW, 2012 GODINA, NAVIGACIJA,KLIMA',
+                'name' => 'RENAULT CLIO 1.5 DCI SW',
                 'price' => '7999',
                 'production_year' => '2012',
                 'kilometers' => 199000,
-                'engine_type' => 'Dizel',
-                'chassis_type' => 'Karavan',
+                'engine_type' => 'Diesel',
+                'chassis_type' => 'Hatchback',
                 'gearbox' => 'Manuelni',
                 'drive' => 'Prednji',
                 'color' => 'Bijela',

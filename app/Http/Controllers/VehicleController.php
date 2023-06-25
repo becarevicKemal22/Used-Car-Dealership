@@ -27,7 +27,7 @@ class VehicleController extends Controller
 
         //Getting the manufacturer names joined onto the vehicles collection so that sorting is available.
         $modelsTable = DB::table('vehicle_models')->leftJoin('manufacturers', 'manufacturer_id', '=', 'manufacturers.id')->select('vehicle_models.name as vehicle_model_name', 'vehicle_models.id as id_of_vehicle_model', 'vehicle_models.vehicle_type_id as vehicle_type_id', 'manufacturers.name as manufacturer_name', 'manufacturers.id as id_of_manufacturer');
-        
+
         $query->joinSub($modelsTable, 'modelsTable', function ($join) {
             $join->on('modelsTable.id_of_vehicle_model', '=', 'vehicle_model_id')->selectRaw('`modelsTable`.`manufacturer_name` as manufacturer_name');
         });
@@ -126,7 +126,7 @@ class VehicleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Requests\StoreVehicle  $request
+     * @param \Illuminate\Http\Requests\StoreVehicle $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreVehicle $request)
@@ -162,9 +162,9 @@ class VehicleController extends Controller
             }
         }
 
-        if($request->has('uDolasku')){
+        if ($request->has('uDolasku')) {
             $vehicle->status = "u_dolasku";
-        }else{
+        } else {
             $vehicle->status = null;
         }
 
@@ -174,7 +174,7 @@ class VehicleController extends Controller
 
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
-                $path = Storage::disk('s3')->put($additionToPath . 'vehicles/' .  'vehicle' . $vehicle->id, $photo);
+                $path = Storage::disk('s3')->put($additionToPath . 'vehicles/' . 'vehicle' . $vehicle->id, $photo);
                 $image = new Image();
                 $image->path = $path;
                 $image->vehicle_id = $vehicle->id;
@@ -188,7 +188,7 @@ class VehicleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -200,8 +200,11 @@ class VehicleController extends Controller
         });
 
         $latest = Vehicle::where('id', '!=', $vehicle->id)->latest()->take(3)->get();
-
-        $thumbnail = Storage::disk('s3')->url($vehicle->thumbnail);
+        if (strlen($vehicle->thumbnail) > 0) {
+            $thumbnail = Storage::disk('s3')->url($vehicle->thumbnail);
+        } else {
+            $thumbnail = "https://placehold.co/600x600";
+        }
         $imagePaths = $vehicle->images()->get()->pluck('path');
         foreach ($imagePaths as $key => $imagePath) {
             $imagePaths[$key] = Storage::disk('s3')->url($imagePath);
@@ -212,12 +215,12 @@ class VehicleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        
+
         $this->authorize('vehicles.update');
         $vehicle = Vehicle::with('equipment')->findOrFail($id);
         $models = VehicleModel::with('manufacturer')->get();
@@ -228,8 +231,8 @@ class VehicleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Requests\StoreVehicle  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Requests\StoreVehicle $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(StoreVehicle $request, $id)
@@ -244,16 +247,16 @@ class VehicleController extends Controller
         foreach ($currentLatest as $vehicle) {
             $vehicle->status = null;
         }
-        
+
         $thumbnail_path = $vehicle->thumbnail;
         $images = $vehicle->images()->get();
         $validated = $request->validated();
         $vehicle->fill($validated);
 
-        if($vehicle->thumbnail == null or $vehicle->thumbnail == '') {
+        if ($vehicle->thumbnail == null or $vehicle->thumbnail == '') {
             return redirect()->back()->withErrors(['thumbnail' => 'Trenutno nije postavljen thumbnail za auto. Izaberite sliku za thumbnail i pokusajte ponovo.']);
         }
-        
+
         //Env must be detected so that the folder in s3 can be set accordingly so that they don't clash
         if (!app()->isProduction()) {
             $additionToPath = 'local/';
@@ -267,7 +270,7 @@ class VehicleController extends Controller
             $vehicle->thumbnail = $path;
         }
 
-        
+
         if ($request->hasFile('photos')) {
             //Deleting all the currently available images
             if ($images) {
@@ -277,7 +280,7 @@ class VehicleController extends Controller
                     Image::find($image->id)->delete();
                 }
             }
-            
+
             //Storing the new ones again
             foreach ($request->file('photos') as $photo) {
                 $path = Storage::disk('s3')->put($additionToPath . 'vehicles/' . 'vehicle' . $vehicle->id, $photo);
@@ -287,7 +290,7 @@ class VehicleController extends Controller
                 $image->save();
             }
         }
-        
+
         $equipment = Equipment::all();
         $equipmentIDs = [];
         foreach ($equipment as $eq) {
@@ -297,15 +300,15 @@ class VehicleController extends Controller
         }
 
         $vehicle->equipment()->sync($equipmentIDs);
-        
-        if($request->has('uDolasku')){
+
+        if ($request->has('uDolasku')) {
             $vehicle->status = "u_dolasku";
-        }else{
+        } else {
             $vehicle->status = null;
         }
-        
+
         $vehicle->save();
-        
+
         $request->session()->flash('status', 'Podaci uspjesno izmijenjeni.');
         return redirect()->route('vozila.show', ['vozila' => $vehicle->id]);
     }
@@ -313,16 +316,16 @@ class VehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         Gate::authorize('vehicles.delete');
         $vehicle = Vehicle::findOrFail($id);
-        
+
         Storage::disk('s3')->delete($vehicle->thumbnail);
-        
+
         Cache::forget($id);
         Cache::forget('all_vehicles');
         $currentLatest = Vehicle::where('status', '=', "new")->get();

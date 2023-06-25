@@ -6,45 +6,41 @@
             <div class="col-lg-9 col-md-7">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="left">
-                        <h4 style="display: inline-block; padding-right: 5px;">Naša trenutna ponuda vozila</h4>
-                        <h5 style="display: inline-block" class="bold-text">(Prikazano {{count($vehicles) }} rezultata za vašu pretragu)</h5>
+                        <h4 style="display: inline-block; padding-right: 5px;">Our current selection of vehicles</h4>
+                        <h5 style="display: inline-block" class="bold-text">(Showing {{count($vehicles) }} results for your search)</h5>
                     </div>
                     <div class="dropdown">
                         <button class="btn btn-secondary bg-primary text-white dropBtn" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="sortDropdown()">
                             <div class="d-flex align-items-center gap-1">
-                                Sortiranje <i class="fa-solid fa-sort" style="padding-left: 5px;"></i>
+                                Sort by <i class="fa-solid fa-sort" style="padding-left: 5px;"></i>
                             </div>
                         </button>
                         <div class="dropdown-menu" id="sortDropdown" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'manufacturer_name', 'desc' => false])) }}">Marka
+                                href="{{ route('vehicles.index', array_merge(\Request::query(), ['sort' => 'manufacturer_name', 'desc' => false])) }}">Manufacturer
                                 A-Z</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'manufacturer_name', 'desc' => true])) }}">Marka
+                                href="{{ route('vehicles.index', array_merge(\Request::query(), ['sort' => 'manufacturer_name', 'desc' => true])) }}">Manufacturer
                                 Z-A</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'price', 'desc' => false])) }}">Cijena
-                                uzlazna</a>
+                                href="{{ route('vehicles.index', array_merge(\Request::query(), ['sort' => 'price', 'desc' => false])) }}">Price: lowest first</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'price', 'desc' => true])) }}">Cijena
-                                silazna</a>
+                                href="{{ route('vehicles.index', array_merge(\Request::query(), ['sort' => 'price', 'desc' => true])) }}">Price: highest first</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'production_year', 'desc' => false])) }}">Godina
-                                proizvodnje: najstarije prvo</a>
+                                href="{{ route('vehicles.index', array_merge(\Request::query(), ['sort' => 'production_year', 'desc' => false])) }}">Manufacturing year: newest first</a>
                             <a class="dropdown-item"
-                                href="{{ route('vozila.index', array_merge(\Request::query(), ['sort' => 'production_year', 'desc' => true])) }}">Godina
-                                proizvodnje: najnovije prvo</a>
+                                href="{{ route('vehicles.index', array_merge(\Request::query(), ['sort' => 'production_year', 'desc' => true])) }}">Manufacturing year: oldest first</a>
                         </div>
                     </div>
                 </div>
-                <form action="{{ route('vozila.index') }}" method="GET">
+                <form action="{{ route('vehicles.index') }}" method="GET">
                     <div class="input-group mt-4 mb-4 d-flex justify-content-center">
                         <div class="form-outline w-75">
                             <input type="search" id="pretraga" name="pretraga" class="form-control"
-                                placeholder="Pretraga vozila" />
+                                placeholder="Vehicle search" />
                         </div>
-                        <button type="submit" class="btn btn-primary" aria-label="Dugme za pretragu">
+                        <button type="submit" class="btn btn-primary" aria-label="button for searching">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -57,10 +53,10 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 pt-3 filters">
-                <h2>Detaljna pretraga</h2>
-                <form action="{{ route('vozila.index') }}" method="GET">
+                <h2>Detailed search</h2>
+                <form action="{{ route('vehicles.index') }}" method="GET">
                     <label for="manufacturer"><i class="fa-solid fa-industry"
-                            style="color: #8a1820; padding-right: 0.5em;"></i> Marka</label> <br>
+                            style="color: #8a1820; padding-right: 0.5em;"></i> Manufacturer</label> <br>
                     <select id="manufacturer" name="manufacturer" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
 
                     </select> <br>
@@ -73,8 +69,7 @@
                         </select> <br>
                     </div>
 
-                    <label for=""><i class="fa-regular fa-calendar mt-2 text-icon-small"></i>Godina
-                        proizvodnje</label> <br>
+                    <label for=""><i class="fa-regular fa-calendar mt-2 text-icon-small"></i>Manufacturing year</label> <br>
                     <div class="godine d-flex gap-3">
                         <select name="years_from" id="years_from" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value="" disabled selected hidden>Od</option>
@@ -93,10 +88,10 @@
                     </div>
 
                     <label for=""><i class="fa-solid fa-hand-holding-dollar mt-2"
-                            style="color: #8a1820; padding-right: 0.5em;"></i> Cijena</label> <br>
+                            style="color: #8a1820; padding-right: 0.5em;"></i> Price</label> <br>
                     <div class="godine d-flex gap-3">
                         <select name="price_from" id="price_from" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
-                            <option value="" disabled selected hidden>Od</option>
+                            <option value="" disabled selected hidden>From</option>
                             <option value=""></option>
                             <option value="5000">5,000</option>
                             <option value="10000">10,000</option>
@@ -112,7 +107,7 @@
                             <option value="70000">70,000</option>
                         </select>
                         <select name="price_to" id="price_to" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
-                            <option value="" disabled selected hidden>Do</option>
+                            <option value="" disabled selected hidden>To</option>
                             <option value=""></option>
                             <option value="5000">5,000</option>
                             <option value="10000">10,000</option>
@@ -130,7 +125,7 @@
                     </div>
 
                     <label for=""><i class="fa-solid fa-bars mt-2"
-                            style="color: #8a1820; padding-right: 0.5em;"></i> Kategorije vozila</label>
+                            style="color: #8a1820; padding-right: 0.5em;"></i> Vehicle categories</label>
                     <div class="kategorije mt-2">
                         @foreach ($types as $type)
                             <div class="form-check">
@@ -147,29 +142,29 @@
                     </div>
 
                     <label for=""><i class="fa-solid fa-filter mt-3"
-                            style="color: #8a1820; padding-right: 0.5em;"></i>Ostali filteri</label>
+                            style="color: #8a1820; padding-right: 0.5em;"></i>Other filters</label>
                     <div class="ostali">
                         <label for=""><i class="fa-solid fa-gears mt-3"
-                                style="color: #8a1820; padding-right: 0.5em;"></i> Mjenjač</label>
+                                style="color: #8a1820; padding-right: 0.5em;"></i> Gearbox</label>
                         <select name="gearbox" id="gearbox" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value=""></option>
-                            <option value="automatik">Automatik</option>
-                            <option value="manuelni">Manuelni</option>
+                            <option value="automatic">Automatic</option>
+                            <option value="manual">Manual</option>
                         </select>
                         <label for=""><i class="fa-solid fa-gas-pump mt-3"
-                                style="color: #8a1820; padding-right: 0.5em;"></i>Gorivo</label>
+                                style="color: #8a1820; padding-right: 0.5em;"></i>Fuel type</label>
                         <select name="engine_type" id="engine_type" class="btn btn-sm btn-secondary w-100 mt-1 mb-2">
                             <option value=""></option>
-                            <option value="benzin">Benzin</option>
-                            <option value="dizel">Dizel</option>
-                            <option value="hibrid">Hibrid</option>
-                            <option value="elektricni">Električni</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="electric">Electric</option>
                         </select>
                     </div>
 
                     <div class="dugme d-flex mt-4 pb-4 justify-content-center">
                         <button type="submit" class="btn btn-primary btn-lg bg-primary text-white"> <i
-                                class="fas fa-search"></i> Pretrazi</button>
+                                class="fas fa-search"></i> Search</button>
                     </div>
 
                 </form>
