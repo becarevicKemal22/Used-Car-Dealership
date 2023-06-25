@@ -28,7 +28,7 @@
             <div class="container">
                 <a class="navbar-brand" href="/">
                     <img src="{{ Storage::disk('s3')->url('/assets/logoWide.webp') }}" height="90"
-                        class="d-inline-block align-top" alt="Eurocentar logo">
+                        class="d-inline-block align-top" alt="Dealership logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -49,9 +49,6 @@
                         </li>
                         <li class="nav-item px-2">
                             <a class="nav-link {{ Request::url() == url('/vozila')  ? 'current-page' : '' }}" href="/vozila"> Ponuda vozila </a>
-                        </li>
-                        <li class="nav-item px-2 {{ Request::url() == url('/usluge')  ? 'current-page' : '' }}">
-                            <a class="nav-link" href="/usluge"> Usluge </a>
                         </li>
                         <li class="nav-item px-2">
                             <a class="nav-link {{ Request::url() == url('/about')  ? 'current-page' : '' }}" href="/about"> O nama </a>
@@ -90,7 +87,7 @@
         <main class="{{ Request::url() == url('/') ? 'pb-4' : 'py-4' }}">
             @auth
                 @if (session('status'))
-                    <h5 class="alert alert-success w-75">{{ session('status') }}</h4>
+                    <h5 class="alert alert-success w-75">{{ session('status') }}</h5>
                     @elseif(session('error'))
                         <h5 class="alert alert-danger w-75">{{ session('error') }}</h5>
                 @endif

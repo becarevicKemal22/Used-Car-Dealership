@@ -8,13 +8,14 @@
         </div>
 
         <div class="mySlides">
-            <img src="https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700222915.jpg"
+            <img
+                src="https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700222915.jpg"
                 style="width:100%" alt="slideshow slika">
         </div>
 
         <div class="mySlides">
             <img src="https://www.supercars.net/blog/wp-content/uploads/2020/09/wallpaperflare.com_wallpaper-1-1.jpg"
-                style="width:100%" alt="slideshow slika">
+                 style="width:100%" alt="slideshow slika">
         </div>
         <div style="text-align:center" class="dot-container">
             <span class="dot" onclick="currentSlide(0)"></span>
@@ -41,19 +42,19 @@
     <div class="container mt-4">
         <div class="row p-4 gx-5 flex-row-reverse">
             <div class="col-lg-6 mb-4">
-                <h2 style="font-weight: bold; color:#8a1820;">Najnovije u ponudi</h4>
-                    <div class="d-flex flex-column justify-content-between gap-3 align-items-center">
-                        @foreach ($latest as $vehicle)
-                            <x-vehicle-card-wide :vehicle="$vehicle"></x-vehicle-card-wide>
-                        @endforeach
-                    </div>
+                <h2 style="font-weight: bold; color:#8a1820;">Najnovije u ponudi</h2>
+                <div class="d-flex flex-column justify-content-between gap-3 align-items-center">
+                    @foreach ($latest as $vehicle)
+                        <x-vehicle-card-wide :vehicle="$vehicle"></x-vehicle-card-wide>
+                    @endforeach
+                </div>
             </div>
             <div class="col-lg-6 mb-4">
-                <h2 style="font-weight: bold; color:#8a1820;">Naša lokacija</h4>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2052.4905700785116!2d18.3168698618783!3d43.84299663868699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758ca8c9a8e0a5b%3A0x8d64a55011bf4213!2sEUROCENTAR%20D.O.O.!5e0!3m2!1sen!2sba!4v1673920043317!5m2!1sen!2sba"
-                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade" title="Google Maps lokacija"></iframe>
+                <h2 style="font-weight: bold; color:#8a1820;">Naša lokacija</h2>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92005.52034758161!2d18.300591448450884!3d43.893693696123165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758cbb1ed719bd1%3A0x562ecda6de87b33e!2sSarajevo!5e0!3m2!1sen!2sba!4v1687700731340!5m2!1sen!2sba"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>
@@ -61,7 +62,8 @@
         <div class="mt-2 p-4 d-flex align-items-center justify-content-center flex-wrap gap-5">
             @foreach ($logos as $idx => $logo)
                 <a href="/vozila?manufacturer={{ $idx }}"><img src="{{ $logo[0] }}"
-                        alt="{{ 'Pretraga ' . $logo[1] }}" style="max-width: 150px; max-height: 150px;"></a>
+                                                               alt="{{ 'Pretraga ' . $logo[1] }}"
+                                                               style="max-width: 150px; max-height: 150px;"></a>
             @endforeach
         </div>
     @endif

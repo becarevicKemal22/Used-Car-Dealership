@@ -58,18 +58,18 @@ class VehicleFactory extends Factory
                 'opis' => 'PEUGEOT 4007 2.2 HDI 4x4
 
                 REGISTROVAN DO : 21.09.2022 GODINE
-                
+
                 Mogućnost zamjene po našoj procjeni
-                
+
                 Euro 5
-                
-                
+
+
                 Mogućnost kreditiranja za vozila!
-    
+
                 2.2 DIZEL
                 2008. GODINA
-                115 KW - 156KS                                                                                  
-                
+                115 KW - 156KS
+
                 Prešao 227.000 km
                 Servisna knjiga (vozilo redovno održavano i servisirano u ovlaštenom servisu)',
                 "thumbnail" => "",
@@ -92,13 +92,13 @@ class VehicleFactory extends Factory
                 'opis' => 'MERCEDES-BENZ S320 CDI
 
                 EURO 4
-                 
+
                 Mogućnost kreditiranja za vozila
-                  
+
                 3.0 DIZEL
                 2008. GODINA
                 173 KW -235 KS
-                
+
                 Prešao 334.000 km
                 Servisna knjiga',
                 "thumbnail" => "",
@@ -122,18 +122,18 @@ class VehicleFactory extends Factory
                 'opis' => 'RENAULT CLIO 1.5 DCI
 
                 MOGUĆNOST ZAMJENE PO NAŠOJ PROCJENI!
-                
+
                 EURO 5
-                
+
                 Mogućnost kreditiranja za vozila!
-                
+
                 1.5 dCI
                 2012 . GODINA
                 55 KW - 75 KS
-        
+
                 Prešao 199.000 km
                 Servisna knjiga (vozilo redovno održavano i servisirano u ovlaštenom servisu)',
-                "thumbnail" => "",
+                "thumbnail" => "/eurocentar/thumbnails/XPZDk64Pi8zjrGsqzqdnT0vbpLBrspYfaBgZLI2J.jpg",
             ];
     });}
 

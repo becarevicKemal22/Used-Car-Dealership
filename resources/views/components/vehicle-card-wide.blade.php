@@ -1,7 +1,11 @@
 <div {{ $attributes->merge(['class' => 'card border-0 h-100 vehicle-card']) }}>
     <div class="row no-gutters">
         <div class="col-md-3 no-padding">
-            <img class="card-img-top" src="{{ Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
+            @if($vehicle->thumbnail)
+                <img class="card-img-top" src="{{ $vehicle-Storage::disk('s3')->url($vehicle->thumbnail) }}" alt="Slika vozila">
+            @else
+                <img class="card-img-top" alt="Placeholder" src="https://placehold.co/600x600">
+            @endif
             @if ($vehicle->status == 'u_dolasku')
                 <span class="ribbon uDolasku"></span>
             @elseif ($vehicle->discount_price > 0)
@@ -10,7 +14,7 @@
                 <span class="ribbon novo"></span>
             @endif
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9 bg-white p-0">
             <div class="card-body">
                 <a href="{{ route('vozila.show', ['vozila' => $vehicle->id]) }}"class="text-black">
                     <h5 class="card-title">{{ $vehicle->name }}</h5>
