@@ -54,7 +54,7 @@
                             <a class="nav-link {{ Request::url() == url('/about')  ? 'current-page' : '' }}" href="/about"> About us </a>
                         </li>
                         <li class="nav-item px-2 {{ Request::url() == url('/contact')  ? 'current-page' : '' }}">
-                            <a class="nav-link" href="/kontakt"> Contact us </a>
+                            <a class="nav-link" href="/contact"> Contact us </a>
                         </li>
                         <!-- Authentication Links -->
 

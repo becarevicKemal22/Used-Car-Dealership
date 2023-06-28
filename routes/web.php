@@ -44,8 +44,8 @@ Route::post('/novi_tip', [VehicleTypeController::class, 'store'])->name('vehicle
 Route::get('/nova_oprema', [EquipmentController::class, 'create'])->name('equipment.create');
 Route::post('/nova_oprema', [EquipmentController::class, 'store'])->name('equipment.store');
 
-Route::view('/contact', 'contact.blade.php');
-Route::view('/about', 'about.blade.php');
+Route::view('/contact', 'contact');
+Route::view('/about', 'about');
 
 Auth::routes(['register' => false, 'reset' => false]);
 
